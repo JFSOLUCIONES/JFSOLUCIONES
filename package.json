@@ -1,0 +1,13 @@
+{
+  "name": "periodico-no-mas-editorial-core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prototipo seguro de clasificación editorial NO+ (sin publicaciones automáticas)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
