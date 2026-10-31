@@ -1,0 +1,117 @@
+{
+  "edition": "2026-10-31",
+  "status": "BORRADOR_REVISION_HUMANA",
+  "target": "9 publicaciones manuales, tres por región",
+  "claims_not_independently_investigated": true,
+  "website_status": "en preparación; no atribuir edición premium como ya accesible",
+  "posts": [
+    {
+      "n": 1,
+      "scope": "local",
+      "topic": "Lluvias y mercados",
+      "title": "CHICLAYO: UNA LLUVIA PONE EN EVIDENCIA LA FRAGILIDAD DEL MERCADO MODELO",
+      "date": "2026-10-30",
+      "source": "RPP Chiclayo",
+      "url": "https://rpp.pe/peru/lambayeque",
+      "post": "🔴 CHICLAYO | ¿ESTAMOS PREPARADOS PARA LAS LLUVIAS?\n\nUna lluvia ligera registrada en Callanca provocó aniegos en el Mercado Modelo de Chiclayo y afectó a comerciantes, según el reporte local. Si un episodio de esta magnitud causa problemas, ¿cuál es el estado real de los drenajes y qué acciones preventivas están ejecutando las autoridades?\n\n📌 NO+ exige prevención, mantenimiento y respuestas verificables. 📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 Próximamente: nuestro periódico digital premium de 8 páginas, S/ 10 por 30 días.\n#NoMas #Chiclayo #Lambayeque #Lluvias #Fiscalizacion",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 2,
+      "scope": "local",
+      "topic": "Salud",
+      "title": "DOS AÑOS ESPERANDO UNA OPERACIÓN: ¿QUIÉN RESPONDE POR LOS PACIENTES?",
+      "date": "2026-10-30",
+      "source": "RPP Chiclayo",
+      "url": "https://rpp.pe/noticias/chiclayo",
+      "post": "🚨 SALUD | LA ESPERA TAMBIÉN ES UNA CRISIS\n\nUn adulto mayor espera desde hace casi dos años una intervención por cálculos renales en el hospital Almanzor Aguinaga de Chiclayo, de acuerdo con un testimonio difundido por RPP. La situación plantea preguntas urgentes sobre listas de espera, derivaciones y trato a los pacientes.\n\n❓ ¿Cuántos casos similares permanecen sin solución? El caso requiere respuesta oficial del hospital.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 NO+ Premium: próximamente, diario digital por S/ 10/30 días.\n#NoMas #Salud #Chiclayo #EsSalud #DerechoALaSalud",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 3,
+      "scope": "local",
+      "topic": "Política y seguridad",
+      "title": "CHICLAYO: MUERTE Y HERIDO EN PENAL REABREN PREGUNTAS DE SEGURIDAD",
+      "date": "2026-10-30",
+      "source": "RPP / declaración INPE",
+      "url": "https://rpp.pe/peru/lambayeque",
+      "post": "🔴 SEGURIDAD | ¿QUÉ OCURRIÓ DENTRO DEL PENAL DE CHICLAYO?\n\nEl INPE informó sobre un interno fallecido y otro herido dentro del establecimiento penitenciario. Corresponde esclarecer las circunstancias, los protocolos aplicados y las medidas correctivas para proteger la vida de quienes están bajo custodia del Estado.\n\n📌 NO+ seguirá este caso con documentación y solicitudes de información, sin adelantar responsabilidades.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 Conoce nuestra próxima edición digital NO+ Premium.\n#NoMas #Chiclayo #INPE #Seguridad #Fiscalizacion",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 4,
+      "scope": "nacional",
+      "topic": "Economía y obras",
+      "title": "OBRAS PARALIZADAS: EL MEF EVALÚA NUEVA VÍA PARA TERMINAR PROYECTOS",
+      "date": "2026-10-30",
+      "source": "Gestión",
+      "url": "https://gestion.pe/noticias/gobierno/",
+      "post": "🏗️ PERÚ | LAS OBRAS INCONCLUSAS NO PUEDEN ESPERAR ETERNAMENTE\n\nEl MEF evalúa ampliar Obras por Impuestos para financiar saldos de proyectos paralizados. La propuesta abre una pregunta de fondo: ¿cómo evitar que una nueva modalidad termine reproduciendo sobrecostos y retrasos?\n\n🔎 NO+ plantea transparencia en expedientes, criterios de selección y rendición de cuentas antes de anunciar resultados.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 Próximamente: edición digital de ocho páginas.\n#NoMas #ObrasPublicas #MEF #Economia #Peru",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 5,
+      "scope": "nacional",
+      "topic": "Corrupción y ambiente",
+      "title": "MINERÍA ILEGAL: INTERVENCIONES AFECTAN BIENES POR S/ 6.2 MILLONES",
+      "date": "2026-10-30",
+      "source": "Agencia Andina / PNP",
+      "url": "https://andina.pe/agencia/noticia-comando-unificado-operativos-afectan-bienes-mineria-ilegal-s62-millones-1097999.aspx",
+      "post": "⚠️ PERÚ | GOLPE A LA MINERÍA ILEGAL, PERO LA FISCALIZACIÓN CONTINÚA\n\nLa Policía informó que operativos en Madre de Dios y Junín afectaron maquinaria e infraestructura asociada a minería ilegal por un valor estimado de S/ 6.2 millones.\n\n❓ ¿Qué investigaciones seguirán? ¿Cómo se evitará el retorno de las operaciones? El valor estimado de lo intervenido no equivale a dinero recuperado.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 NO+ Premium: próximamente, S/ 10 por 30 días.\n#NoMas #MineriaIlegal #MedioAmbiente #Peru",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 6,
+      "scope": "nacional",
+      "topic": "Elecciones",
+      "title": "MÁS DE TRES MILLONES VOTARÁN EN ELECCIONES DE CENTROS POBLADOS",
+      "date": "2026-10-30",
+      "source": "Agencia Andina / JNE",
+      "url": "https://andina.pe/agencia//loultimo",
+      "post": "🗳️ PERÚ | ESTE DOMINGO SE ELIGEN AUTORIDADES EN CENTROS POBLADOS\n\nMás de tres millones de personas están convocadas a las elecciones de autoridades municipales de centros poblados del 1 de noviembre, según información difundida por Andina.\n\n📌 Antes de acudir, consulta los canales electorales oficiales de tu localidad. La vigilancia y la participación informada son esenciales para un proceso transparente.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 Descubre la propuesta de nuestro diario digital NO+ Premium.\n#NoMas #Elecciones #CentrosPoblados #Democracia",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 7,
+      "scope": "internacional",
+      "topic": "Geopolítica",
+      "title": "G20 EN TENSIÓN: EUROPA SE OPONE A FOTO CON RUSIA",
+      "date": "2026-10-30",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/world/g20-foreign-ministers-skip-photo-op-amid-objections-over-russia-2026-10-30/",
+      "post": "🌍 MUNDO | LA DIVISIÓN GEOPOLÍTICA LLEGA AL G20\n\nLos cancilleres reunidos en Atlanta omitieron la fotografía oficial tradicional después de objeciones de representantes europeos a aparecer junto al ministro ruso. Más allá del gesto diplomático, las diferencias sobre la guerra en Ucrania siguen marcando las conversaciones internacionales.\n\n❓ ¿Puede el G20 avanzar en acuerdos cuando la tensión política domina la agenda?\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 Lee nuestros análisis en la próxima edición NO+ Premium.\n#NoMas #G20 #Europa #Rusia #Mundo",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 8,
+      "scope": "internacional",
+      "topic": "Tecnología y economía",
+      "title": "INTELIGENCIA ARTIFICIAL: CRECE LA INVERSIÓN, PERO TAMBIÉN EL TEMOR DEL MERCADO",
+      "date": "2026-10-30",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/business/media-telecom/nasdaq-faces-2-trillion-wipeout-october-ai-spending-fears-deepen-2026-10-30/",
+      "post": "🤖 MUNDO | ¿QUIÉN PAGARÁ LA FACTURA DE LA INTELIGENCIA ARTIFICIAL?\n\nEl Nasdaq 100 acumulaba una caída superior al 5.8 % durante octubre, mientras los inversionistas examinaban el fuerte gasto en infraestructura de IA y sus retornos futuros. El avance tecnológico convive con interrogantes sobre deuda, rentabilidad y empleo.\n\n📊 No toda inversión en IA garantiza ganancias: NO+ seguirá el impacto económico real.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 Próximamente nuestro periódico digital premium.\n#NoMas #Tecnologia #InteligenciaArtificial #Economia",
+      "approved": false,
+      "autopublish": false
+    },
+    {
+      "n": 9,
+      "scope": "internacional",
+      "topic": "Desastres y prevención",
+      "title": "FILIPINAS ELEVA LA ALERTA POR ACTIVIDAD DEL VOLCÁN MAYÓN",
+      "date": "2026-10-30",
+      "source": "Reuters / autoridades filipinas",
+      "url": "https://www.reuters.com/business/environment/philippines-raises-alert-level-mayon-volcano-2026-10-30/",
+      "post": "🌋 MUNDO | EL MAYÓN VUELVE A ENCENDER LAS ALERTAS\n\nFilipinas elevó el nivel de alerta del volcán Mayón tras una erupción descrita por las autoridades como moderadamente explosiva. La prioridad es seguir las instrucciones oficiales de protección civil, sin difundir imágenes antiguas ni cifras de afectados no confirmadas.\n\n📌 La prevención y la información precisa también salvan vidas.\n\n📲 +51 906 605 712 | 🌐 periodiconomas.space\n💎 NO+ Premium: información contextualizada en nuestro futuro diario digital.\n#NoMas #Filipinas #VolcanMayon #Prevencion #Mundo",
+      "approved": false,
+      "autopublish": false
+    }
+  ]
+}
