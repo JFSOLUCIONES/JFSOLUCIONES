@@ -2,7 +2,7 @@
   "fecha_programacion": "2026-10-31",
   "medio": "Periódico NO MÁS",
   "total": 9,
-  "policy": "Sin publicación automática; 9 borradores basados en fuentes 29-30 octubre, aprobación editorial obligatoria",
+  "policy": "Textos públicos originales con enlaces de investigación separados; atribución pública obligatoria cuando proceda; aprobación humana; URLs en este JSON siguen siendo públicas porque el repositorio es público.",
   "posts": [
     {
       "numero": 1,
@@ -12,12 +12,13 @@
       "titular": "Lambayeque registra 701 reportes de violencia escolar hasta octubre",
       "fuente": "Diario Correo / declaraciones UGEL Chiclayo",
       "url": "https://diariocorreo.pe/edicion/lambayeque/lambayeque-suma-701-casos-de-violencia-escolar-y-ocupa-el-segundo-lugar-a-nivel-nacional-noticia/",
-      "copy": "📰 #NOMás | EDUCACIÓN EN ALERTA\n\nLambayeque acumuló 701 reportes de violencia escolar hasta el 26 de octubre de 2026, según cifras expuestas por un funcionario de la UGEL Chiclayo y recogidas por Diario Correo. El reporte señala 369 casos en colegios públicos y 332 en privados.\n\nLa cifra obliga a preguntar qué mecanismos de prevención, respuesta y acompañamiento están funcionando en nuestras escuelas.\n\n📅 Información difundida el 30/10/2026.\n🔎 Fuente: Diario Correo (enlace al final).\n#Lambayeque #Educación #NoMás\n🔗 https://diariocorreo.pe/edicion/lambayeque/lambayeque-suma-701-casos-de-violencia-escolar-y-ocupa-el-segundo-lugar-a-nivel-nacional-noticia/",
+      "copy": "📰 #NOMás | EDUCACIÓN EN ALERTA\n\nLambayeque acumuló 701 reportes de violencia escolar hasta el 26 de octubre de 2026, según cifras expuestas por un funcionario de la UGEL Chiclayo y recogidas por Diario Correo. El reporte señala 369 casos en colegios públicos y 332 en privados.\n\nLa cifra obliga a preguntar qué mecanismos de prevención, respuesta y acompañamiento están funcionando en nuestras escuelas.\n\n📅 Información difundida el 30/10/2026.\n#Lambayeque #Educación #NoMás\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "Atribuir las cifras a la fuente; verificar actualización de UGEL antes de publicar.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 2,
@@ -27,12 +28,13 @@
       "titular": "Destinan S/ 2 millones para proteger patrimonio cultural ante El Niño",
       "fuente": "El Comercio / Ministerio de Cultura",
       "url": "https://elcomercio.pe/peru/lambayeque/fenomeno-el-nino-ministerio-de-cultura-destino-2-millones-de-soles-para-implementar-acciones-de-prevencion-y-proteccion-del-patrimonio-cultural-de-lambayeque-ultimas-noticia/?outputType=amp",
-      "copy": "🌧️ #NOMás | PREVENCIÓN EN LAMBAYEQUE\n\nEl Ministerio de Cultura anunció S/ 2 millones destinados a acciones preventivas para museos, sitios arqueológicos y el Santuario Histórico Bosque de Pómac ante posibles efectos del fenómeno El Niño.\n\nLa asignación es un primer paso. La pregunta ciudadana es cómo, cuándo y dónde se ejecutarán las intervenciones.\n\n📅 Anuncio reportado el 29/10/2026.\n🔎 Fuente: El Comercio (enlace al final).\n#PatrimonioCultural #Lambayeque #ElNiño\n🔗 https://elcomercio.pe/peru/lambayeque/fenomeno-el-nino-ministerio-de-cultura-destino-2-millones-de-soles-para-implementar-acciones-de-prevencion-y-proteccion-del-patrimonio-cultural-de-lambayeque-ultimas-noticia/?outputType=amp",
+      "copy": "🌧️ #NOMás | PREVENCIÓN EN LAMBAYEQUE\n\nEl Ministerio de Cultura anunció S/ 2 millones destinados a acciones preventivas para museos, sitios arqueológicos y el Santuario Histórico Bosque de Pómac ante posibles efectos del fenómeno El Niño.\n\nLa asignación es un primer paso. La pregunta ciudadana es cómo, cuándo y dónde se ejecutarán las intervenciones.\n\n📅 Anuncio reportado el 29/10/2026.\n#PatrimonioCultural #Lambayeque #ElNiño\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "No afirmar que todo el presupuesto ya se ejecutó.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 3,
@@ -42,12 +44,13 @@
       "titular": "ExpoCafé Lambayeque registra más de S/ 115 mil en comercialización",
       "fuente": "AgroPerú",
       "url": "https://www.agroperu.pe/expocafe-lambayeque-2026-comercializo-mas-de-s-115-000-y-premio-a-los-mejores-productores-de-la-region/",
-      "copy": "☕ #NOMás | EL CAFÉ LAMBAYECANO AVANZA\n\nLa ExpoCafé Lambayeque 2026 reportó más de S/ 115 mil en comercialización durante su primera edición en Chiclayo, con participación de productores de zonas altoandinas como Cañaris e Incahuasi.\n\nUna oportunidad para visibilizar a quienes producen y generan valor desde el campo.\n\n📅 Balance difundido el 30/10/2026.\n🔎 Fuente: AgroPerú (enlace al final).\n#CaféPeruano #Chiclayo #Emprendimiento\n🔗 https://www.agroperu.pe/expocafe-lambayeque-2026-comercializo-mas-de-s-115-000-y-premio-a-los-mejores-productores-de-la-region/",
+      "copy": "☕ #NOMás | EL CAFÉ LAMBAYECANO AVANZA\n\nLa ExpoCafé Lambayeque 2026 reportó más de S/ 115 mil en comercialización durante su primera edición en Chiclayo, con participación de productores de zonas altoandinas como Cañaris e Incahuasi.\n\nUna oportunidad para visibilizar a quienes producen y generan valor desde el campo.\n\n📅 Balance difundido el 30/10/2026.\n#CaféPeruano #Chiclayo #Emprendimiento\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "Conservar carácter de balance reportado, sin proyectar ventas futuras.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 4,
@@ -57,12 +60,13 @@
       "titular": "Corte de Lambayeque implementa expediente electrónico en flagrancia",
       "fuente": "Corte Superior de Justicia de Lambayeque",
       "url": "https://csjla.pe/noticias",
-      "copy": "⚖️ #NOMás | JUSTICIA DIGITAL\n\nLa Corte Superior de Justicia de Lambayeque informó que implementó el Expediente Judicial Electrónico y la Mesa de Partes Electrónica en unidades de flagrancia de Chiclayo y Jaén.\n\nLa digitalización puede facilitar la tramitación; su impacto deberá evaluarse mediante tiempos de atención y acceso efectivo de la ciudadanía.\n\n📅 Comunicado del 30/10/2026.\n🔎 Fuente: Corte Superior de Justicia de Lambayeque.\n#Justicia #Chiclayo #TransformaciónDigital\n🔗 https://csjla.pe/noticias",
+      "copy": "⚖️ #NOMás | JUSTICIA DIGITAL\n\nLa Corte Superior de Justicia de Lambayeque informó que implementó el Expediente Judicial Electrónico y la Mesa de Partes Electrónica en unidades de flagrancia de Chiclayo y Jaén.\n\nLa digitalización puede facilitar la tramitación; su impacto deberá evaluarse mediante tiempos de atención y acceso efectivo de la ciudadanía.\n\n📅 Comunicado del 30/10/2026.\n#Justicia #Chiclayo #TransformaciónDigital\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "No afirmar reducción efectiva de tiempos sin mediciones.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 5,
@@ -72,12 +76,13 @@
       "titular": "Corte de Lambayeque exhibe documentos históricos del archivo judicial",
       "fuente": "Corte Superior de Justicia de Lambayeque",
       "url": "https://csjla.pe/noticias",
-      "copy": "📜 #NOMás | MEMORIA Y DOCUMENTOS\n\nLa Corte de Lambayeque anunció una exposición de expedientes, documentos y fotografías históricas por la Semana del Archivo Judicial.\n\nConservar y facilitar el acceso a los archivos ayuda a comprender cómo ha evolucionado la administración de justicia en nuestra región.\n\n📅 Información del 30/10/2026.\n🔎 Fuente: Corte Superior de Justicia de Lambayeque.\n#Historia #Lambayeque #ArchivoJudicial\n🔗 https://csjla.pe/noticias",
+      "copy": "📜 #NOMás | MEMORIA Y DOCUMENTOS\n\nLa Corte de Lambayeque anunció una exposición de expedientes, documentos y fotografías históricas por la Semana del Archivo Judicial.\n\nConservar y facilitar el acceso a los archivos ayuda a comprender cómo ha evolucionado la administración de justicia en nuestra región.\n\n📅 Información del 30/10/2026.\n#Historia #Lambayeque #ArchivoJudicial\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "Confirmar horario y acceso antes de invitar al público.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 6,
@@ -87,12 +92,13 @@
       "titular": "Panadero de Monsefú crea réplica comestible de la Basílica de San Pedro",
       "fuente": "Diario Correo",
       "url": "https://diariocorreo.pe/edicion/lambayeque/chiclayo-panadero-elabora-replica-de-la-basilica-de-san-pedro-en-homenaje-al-papa-leon-xiv-noticia/",
-      "copy": "🥖 #NOMás | TALENTO DE MONSEFÚ\n\nEl maestro panadero Víctor Pisfil Relúz elaboró una réplica comestible de la Basílica de San Pedro, con una estructura de aproximadamente ocho kilos, como homenaje previo a la visita anunciada del papa León XIV.\n\nEl arte popular también cuenta historias: creatividad, tradición y oficio local.\n\n📅 Reporte del 30/10/2026.\n🔎 Fuente: Diario Correo (enlace al final).\n#Monsefú #Cultura #Lambayeque\n🔗 https://diariocorreo.pe/edicion/lambayeque/chiclayo-panadero-elabora-replica-de-la-basilica-de-san-pedro-en-homenaje-al-papa-leon-xiv-noticia/",
+      "copy": "🥖 #NOMás | TALENTO DE MONSEFÚ\n\nEl maestro panadero Víctor Pisfil Relúz elaboró una réplica comestible de la Basílica de San Pedro, con una estructura de aproximadamente ocho kilos, como homenaje previo a la visita anunciada del papa León XIV.\n\nEl arte popular también cuenta historias: creatividad, tradición y oficio local.\n\n📅 Contexto: 30/10/2026.\n#Monsefú #Cultura #Lambayeque\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "No confundir visita anunciada con llegada ya ocurrida.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 7,
@@ -102,12 +108,13 @@
       "titular": "Osiptel reafirma bloqueo de celulares utilizados ilegalmente desde penales",
       "fuente": "Agencia Andina / Osiptel",
       "url": "https://andina.pe/agencia/noticia-osiptel-operadoras-deben-mantener-cortes-moviles-y-bloqueo-equipos-desde-penales-1098011.aspx",
-      "copy": "📱 #NOMás | SEGURIDAD Y TELECOMUNICACIONES\n\nOsiptel reiteró que las operadoras deben mantener los cortes de líneas y bloqueos de equipos cuando se detecte su uso prohibido desde establecimientos penitenciarios, pese a una suspensión temporal de artículos regulatorios.\n\nEl organismo también subrayó la importancia de evitar afectaciones a usuarios ajenos a actividades ilícitas.\n\n📅 Información oficial difundida el 30/10/2026.\n🔎 Fuente: Agencia Andina / Osiptel.\n#SeguridadCiudadana #Osiptel #Perú\n🔗 https://andina.pe/agencia/noticia-osiptel-operadoras-deben-mantener-cortes-moviles-y-bloqueo-equipos-desde-penales-1098011.aspx",
+      "copy": "📱 #NOMás | SEGURIDAD Y TELECOMUNICACIONES\n\nOsiptel reiteró que las operadoras deben mantener los cortes de líneas y bloqueos de equipos cuando se detecte su uso prohibido desde establecimientos penitenciarios, pese a una suspensión temporal de artículos regulatorios.\n\nEl organismo también subrayó la importancia de evitar afectaciones a usuarios ajenos a actividades ilícitas.\n\n📅 Contexto: 30/10/2026.\n#SeguridadCiudadana #Osiptel #Perú\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "Evitar asegurar que todos los bloqueos son correctos.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 8,
@@ -117,12 +124,13 @@
       "titular": "Operativos contra minería ilegal afectan bienes por más de S/ 6.2 millones",
       "fuente": "Agencia Andina / Policía Nacional",
       "url": "https://andina.pe/agencia/noticia-comando-unificado-operativos-afectan-bienes-mineria-ilegal-s62-millones-1097999.aspx",
-      "copy": "🌿 #NOMás | LUCHA CONTRA LA MINERÍA ILEGAL\n\nLa Policía Nacional informó sobre dos operativos en Madre de Dios y Junín que afectaron maquinaria e infraestructura vinculada a actividades de minería ilegal, por un valor estimado superior a S/ 6.2 millones.\n\nLos resultados operativos deben acompañarse de seguimiento a las investigaciones, protección ambiental y recuperación de territorios afectados.\n\n📅 Reporte del 30/10/2026.\n🔎 Fuente: Agencia Andina / PNP.\n#MineríaIlegal #MedioAmbiente #Perú\n🔗 https://andina.pe/agencia/noticia-comando-unificado-operativos-afectan-bienes-mineria-ilegal-s62-millones-1097999.aspx",
+      "copy": "🌿 #NOMás | LUCHA CONTRA LA MINERÍA ILEGAL\n\nLa Policía Nacional informó sobre dos operativos en Madre de Dios y Junín que afectaron maquinaria e infraestructura vinculada a actividades de minería ilegal, por un valor estimado superior a S/ 6.2 millones.\n\nLos resultados operativos deben acompañarse de seguimiento a las investigaciones, protección ambiental y recuperación de territorios afectados.\n\n📅 Contexto: 30/10/2026.\n#MineríaIlegal #MedioAmbiente #Perú\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "Valor estimado de bienes afectados, no dinero recuperado.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     },
     {
       "numero": 9,
@@ -132,12 +140,13 @@
       "titular": "JNE desplegará más de 3 mil fiscalizadores para elecciones en centros poblados",
       "fuente": "Agencia Andina / JNE",
       "url": "https://andina.pe/agencia/noticia-jne-desplegara-mas-tres-mil-fiscalizadores-elecciones-centros-poblados-1097943.aspx",
-      "copy": "🗳️ #NOMás | INFORMACIÓN ELECTORAL\n\nEl Jurado Nacional de Elecciones anunció el despliegue de más de 3 mil fiscalizadores para supervisar las elecciones de autoridades municipales de centros poblados del domingo 1 de noviembre de 2026.\n\nLa vigilancia del proceso incluye instalación de mesas, sufragio y escrutinio. Consulta la información oficial de tu localidad antes de acudir a votar.\n\n📅 Anuncio del 30/10/2026.\n🔎 Fuente: Agencia Andina / JNE.\n#Elecciones2026 #CentrosPoblados #InformaciónCiudadana\n🔗 https://andina.pe/agencia/noticia-jne-desplegara-mas-tres-mil-fiscalizadores-elecciones-centros-poblados-1097943.aspx",
+      "copy": "🗳️ #NOMás | INFORMACIÓN ELECTORAL\n\nEl Jurado Nacional de Elecciones anunció el despliegue de más de 3 mil fiscalizadores para supervisar las elecciones de autoridades municipales de centros poblados del domingo 1 de noviembre de 2026.\n\nLa vigilancia del proceso incluye instalación de mesas, sufragio y escrutinio. Consulta la información oficial de tu localidad antes de acudir a votar.\n\n📅 Contexto: 30/10/2026.\n#Elecciones2026 #CentrosPoblados #InformaciónCiudadana\n\n📲 +51 906 605 712\n🌐 periodiconomas.space",
       "riesgo": "Información neutral sin inducción de voto.",
       "estado": "BORRADOR_PARA_APROBACION",
       "autopublicacion": false,
       "logo": "NO+",
-      "formato": "4:5"
+      "formato": "4:5",
+      "politica_fuentes": "Ficha documental adjunta; exigir atribución pública cuando corresponda según autoría, derechos y relevancia."
     }
   ]
 }
