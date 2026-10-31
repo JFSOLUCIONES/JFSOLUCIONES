@@ -1,0 +1,45 @@
+# Solo activar cuando exista una app Payload compilable en ./app y .env.cms local.
+# App y base de datos AISLADAS del JF CONNECT compartido.
+# Produccion: no exponer 3000 ni 5432 al exterior; Caddy hace reverse proxy a 127.0.0.1:3401.
+name: nomas-cms
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nomas_editorial
+      POSTGRES_USER: nomas_editorial
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?define_POSTGRES_PASSWORD}
+    volumes:
+      - nomas_pg:/var/lib/postgresql/data
+    networks: [nomas_private]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nomas_editorial -d nomas_editorial"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  cms:
+    build:
+      context: ./app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      DATABASE_URL: postgres://nomas_editorial:${POSTGRES_PASSWORD:?define_POSTGRES_PASSWORD}@db:5432/nomas_editorial
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:?define_PAYLOAD_SECRET}
+      NEXT_PUBLIC_SERVER_URL: https://redaccion.periodiconomas.space
+    ports:
+      - "127.0.0.1:3401:3000"
+    networks: [nomas_private]
+    volumes:
+      - nomas_media:/app/media
+
+networks:
+  nomas_private:
+    driver: bridge
+volumes:
+  nomas_pg:
+  nomas_media:
