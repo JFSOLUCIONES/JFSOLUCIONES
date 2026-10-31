@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "name": "Canal oficial de prensa autorizado — EJEMPLO",
+      "url": "https://example.org/noticias/rss.xml",
+      "platform": "web",
+      "region": "Lambayeque",
+      "enabled": false,
+      "authorized": true
+    },
+    {
+      "name": "RSS-Bridge TikTok público — configurar instancia permitida",
+      "url": "https://example.org/rssbridge.xml",
+      "platform": "tiktok",
+      "region": "Lambayeque",
+      "enabled": false,
+      "authorized": false
+    }
+  ]
+}
