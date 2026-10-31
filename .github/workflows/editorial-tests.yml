@@ -6,6 +6,7 @@ on:
       - "test/**"
       - "package.json"
       - "editorial/**"
+      - "radar_social/**"
       - ".github/workflows/editorial-tests.yml"
   pull_request:
     paths:
@@ -25,3 +26,5 @@ jobs:
           node-version: "22"
       - name: Testear clasificador editorial sin credenciales
         run: npm test
+      - name: Verificar Radar Social con fuentes sinteticas
+        run: python3 -m unittest discover -s radar_social/tests -v
