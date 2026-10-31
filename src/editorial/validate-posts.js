@@ -10,9 +10,9 @@ for(const p of data.posts){
  const tag='Post '+p.numero;
  if(!/^https:\/\//.test(p.url||'')) issues.push(tag+': falta URL de fuente');
  if(!/^2026-10-(29|30|31)$/.test(p.fecha_fuente||'')) issues.push(tag+': fecha de fuente sin verificar');
- if(!p.copy?.includes(p.url)) issues.push(tag+': copy debe incluir fuente enlazada');
+ if(!p.copy?.includes('periodiconomas.space') || !p.copy?.includes('+51 906 605 712')) issues.push(tag+': faltan web y contacto publico');
  if(p.estado!=='BORRADOR_PARA_APROBACION'||p.autopublicacion!==false) issues.push(tag+': requiere revisión humana');
- if(!p.riesgo) issues.push(tag+': falta precaución editorial');
+ if(!p.riesgo || !p.fuente) issues.push(tag+': falta ficha documental o cautela editorial');
  if(!p.logo || p.logo!=='NO+') issues.push(tag+': logo incorrecto');
  if(seen.has(p.titular)) issues.push(tag+': titular duplicado');
  seen.add(p.titular);
