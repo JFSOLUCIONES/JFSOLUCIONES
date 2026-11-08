@@ -12,6 +12,9 @@ const filled=()=>{const e=createEditionDraft("2026-11-07");for(const p of e.page
 test("crea 12 páginas y 36 huecos, todos bloqueados",()=>{
  const e=createEditionDraft("2026-11-07");
  assert.equal(e.pages.length,12);
+ assert.equal(e.pages[0].slots.length,0);
+ assert.equal(e.pages[1].slots.length,4);
+ assert.equal(e.pages[11].slots.length,3);
  assert.equal(e.pages.flatMap(p=>p.slots).length,36);
  assert.equal(e.autoPublish,false);
  assert.equal(validateEdition(e).ready,false);
