@@ -27,13 +27,13 @@ test("36 expedientes con trazabilidad formal superan solo validación de esquema
 });
 test("no aprueba una noticia sin fuente ni derechos de foto",()=>{
  const e=filled();
- e.pages[0].slots[0].article.sources=[];
- e.pages[1].slots[0].article.visual={type:"photo"};
+ e.pages[1].slots[0].article.sources=[];
+ e.pages[2].slots[0].article.visual={type:"photo"};
  assert.equal(validateEdition(e).ready,false);
 });
 test("denuncia sensible requiere auditoría legal y registro del descargo",()=>{
  const e=filled();
- e.pages[0].slots[0].article.sensitiveAllegation=true;
+ e.pages[1].slots[0].article.sensitiveAllegation=true;
  assert.equal(validateEdition(e).ready,false);
 });
 test("activar autoPublish bloquea la edición",()=>{
