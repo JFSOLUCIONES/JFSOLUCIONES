@@ -44,3 +44,11 @@ La dirección abre el radar, pulsa **Execute workflow** (Manual Trigger) y el mo
 
 ## Objetivo de aceptación
 Conservar la automatización aunque el director no envíe orden. Una orden manual debe producir la edición de mañana y no provocar borrado de lo investigado. La entrega automática final solo existe cuando **el expediente con fuentes, las fotos, el PDF, el portal y la salida Meta** hayan pasado pruebas reales en ese orden.
+
+## Actualización 08/11 — cola de investigación añadida al MISMO radar
+- Tabla interna `NO_MAS_EXPEDIENTES_INVESTIGACION`, id `wy5HfrNEj2AiiZRf`. No es otro producto ni un CMS.
+- Al finalizar el radar, se crea o actualiza una orden por candidato, indicando sección, URL inicial, medio, estado `PENDIENTE_INVESTIGACION`, fuentes pendientes, revisión legal y autorización de fotos, todo en falso inicialmente.
+- Se preservan expedientes ya investigados, verificados o aprobados; los candidatos tempranos de la misma edición pueden actualizarse mientras sigan pendientes.
+- Ejecución manual n8n **220**: 17 expedientes creados para **lunes 09/11/2026**; ninguno verificado ni listo para publicar.
+- El paso implementado es **preparación de expedientes para agentes**. NO significa que Firecrawl, el LLM investigador y el editor de reportajes ya hayan realizado sus verificaciones. Para automatizar Firecrawl desde n8n se necesita una credencial API válida dentro de la infraestructura de JF CONNECT y control de costos.
+- La inspección PDF automatizada con PyMuPDF se preparó y probó sobre V5. Para usarla en producción hay que instalarla como control prepublicación en el servicio de diagramación; hoy el script solo existe como herramienta de QA externa al VPS.
