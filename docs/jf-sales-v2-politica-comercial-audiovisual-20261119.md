@@ -47,3 +47,29 @@ Operaciones que requieren aprobación humana: cambios de condiciones legales, co
 - Tests: empresa con mismo nombre pero RUC distinto; número sin vínculo verificable; prospecto con presupuesto bajo; empresa con alcance grande; solicitud musical sin licencia; muestra visual sin logo autorizado; rechazo de marketing; cotización inferior al costo; derivación al 901170429 solo por canal privado verificado.
 - Probar 30+ conversaciones sintéticas y observar costo por cliente, tasa de cotización, satisfacción y tasa real de cierre.
 - Producción mediante despliegue gradual y reversible; conservar WhatsApp Central intacto durante desarrollo.
+
+
+## Comunicación clara de derechos musicales
+- «Canción personal» indica el destino del cliente (regalos, cumpleaños, aniversario sin campaña comercial), NO autorización para producir y vender usando una licencia gratuita que prohíbe usos comerciales. La producción remunerada JF debe cumplir licencia del proveedor.
+- «Jingle empresarial» se usará en publicidad de negocios y requiere derechos comerciales válidos tanto de la generación como de las letras, voces, muestras y materiales incorporados. Explicar con ejemplos comprensibles.
+- Suno: solo usar para entregas comerciales producciones creadas bajo condiciones que permitan ese uso (p.ej. Pro/Premier mientras se generan), comprobar plan y fecha de creación, no presumir derechos retroactivos ni registro exclusivo de copyright.
+- Entregar por escrito lo que incluye y usos permitidos al cliente; no prometer propiedad intelectual exclusiva, registro automático, uso de voces de terceros o distribución en Spotify sin revisar condiciones.
+- Referencia: https://help.suno.com/en/articles/2410177 y https://help.suno.com/en/articles/2746945
+
+## Campañas con descuentos, versión preliminar
+- Fecha de referencia: 2026-11-19. «Febrero, Mes del Amor» debe programarse para 2027-02-01 a 2027-02-28; NUNCA anunciarla como vigente durante noviembre de 2026.
+- Para captar clientes ahora: campaña de lanzamiento de noviembre/diciembre solo cuando exista aprobación de fechas, catálogo, presupuesto y condiciones.
+- Descuento del 50% es PROPUESTA, no regla desplegada. Activar por SKU aprobado, con precio base verificable y no inflado, fechas de vigencia, cupo, servicios incluidos/excluidos, límites por cliente, condiciones de impuestos, y margen mínimo.
+- Antes de aplicar descuento: precio_final = precio_base * 0.5; verificar precio_final >= precio_neto_minimo más impuestos según régimen; si no, no ofrecer rebaja y derivar a alternativa rentable o aprobación humana. No combinar descuentos automáticamente.
+- El agente puede sugerir nuevas campañas mensuales a revisión administrativa; no inventar eventos reales, urgencia falsa o descuentos sin autorización.
+- Mostrar al cliente condiciones completas antes de confirmar compra.
+
+## Cierre autónomo y cola de producción
+Estados CRM: NUEVO -> CALIFICADO -> COTIZADO -> ACEPTADO -> PENDIENTE_PAGO -> PAGO_VERIFICADO -> PRODUCCION -> REVISION_QA -> ENTREGADO.
+- Obtener nombre/empresa, contacto consentido, objetivo, entregable, texto, duración, formato, logotipo y permiso, precio aprobado, descuento aplicado, impuestos, plazo viable y revisiones.
+- No afirmar pago recibido solo por captura de pantalla; verificar en pasarela o reconciliación humana. «Cerrado» significa oferta aceptada; «listo para producción» requiere requisitos completos y política de anticipo/pago satisfecha.
+- Generar order_id único e idempotente; guardar trazabilidad y evitar reenvíos duplicados.
+- Alertar al propietario por canal privado verificado al 901 170 429 con resumen mínimo necesario: order_id, cliente, servicio, precio, comprobación de pago, archivos/autorizaciones, fecha pactada, instrucciones de producción y enlace al CRM; no enviar secretos, credenciales o datos personales innecesarios.
+- Si QA exige humano, avisar antes de prometer una fecha irreversible. Nunca enviar alertas mediante WhatsApp hasta verificar el canal Meta oficial y la autorización de envío.
+- Política de WhatsApp: atención dentro de las 24h de última interacción; fuera de ventana usar plantillas aprobadas y consentimiento aplicable. https://business.whatsapp.com/policy/preview?lang=es_LA
+- En laboratorio, probar pedido canción regalo, jingle comercial, campaña febrero fuera de fecha, rebaja bajo costo, aprobación del cliente sin pago, pago verificado y duplicado de notificación.
