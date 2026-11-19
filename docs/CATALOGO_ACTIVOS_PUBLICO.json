@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-11-19",
+  "disclaimer": "Inventario público sin secretos; los estados son verificaciones limitadas, no pruebas integrales de disponibilidad.",
+  "assets": [
+    {
+      "id": "jf-gestion360",
+      "category": "plataforma",
+      "name": "Gestión 360",
+      "location": "VPS1",
+      "components": [
+        "jfgestion360-web-1",
+        "jfgestion360-db-1"
+      ],
+      "status": "infraestructura_detectada",
+      "verification": "n8n radar VPS1 ejecucion 874, 2026-11-19; no hay prueba funcional exhaustiva"
+    },
+    {
+      "id": "jf-connect-n8n",
+      "category": "automatizacion",
+      "name": "JF CONNECT n8n",
+      "location": "VPS1",
+      "status": "infraestructura_detectada",
+      "verification": "n8n radar VPS1 ejecucion 874, 2026-11-19"
+    },
+    {
+      "id": "jf-control-ai",
+      "category": "operaciones",
+      "name": "JF CONTROL AI",
+      "status": "auditoria_lectura",
+      "url": "https://n8n.jfconnect.online/workflow/OLLaJ07TgxVVwqYu",
+      "verification": "radar VPS1 programado cada 6 horas, 2026-11-19"
+    },
+    {
+      "id": "jf-sports-edge",
+      "category": "deportes",
+      "name": "JF SPORTS EDGE AI",
+      "status": "desarrollo",
+      "admin_url": "https://gestion360.jfconnect.online/admin/sistemas/jf-sports-edge-ai/",
+      "verification": "motor CORE independiente no desplegado a 2026-11-19"
+    },
+    {
+      "id": "jf-studio",
+      "category": "produccion",
+      "name": "JF STUDIO",
+      "status": "estado_no_verificado"
+    },
+    {
+      "id": "certse",
+      "category": "cliente",
+      "name": "CERTSE FAP",
+      "status": "estado_no_verificado"
+    },
+    {
+      "id": "no-mas",
+      "category": "cliente",
+      "name": "NO+",
+      "status": "estado_no_verificado"
+    }
+  ]
+}
