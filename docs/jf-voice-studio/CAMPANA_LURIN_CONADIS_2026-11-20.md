@@ -45,3 +45,9 @@ Seguimos trabajando por un distrito con más derechos, accesibilidad y oportunid
 - Confirmar autorización de imágenes, denominaciones institucionales, logos y términos vigentes antes de publicación.
 - No mezclar actividades de cliente municipal con propaganda electoral. Copy informativo de gestión, sin pedir apoyo electoral.
 - Versionar código/guion público, guardar medios originales y salidas MP4 en depósito privado cifrado.
+
+## Pipeline n8n específico de Lurín
+- Workflow de laboratorio creado: `QiM3stZGn6fHwRXJ` (`JF STUDIO | LURIN CONADIS - Locucion Kokoro (PRUEBA, NO PUBLICA)`).
+- Proyecto n8n personal `JF CONNECT <jfsolucionesonline@gmail.com>`.
+- Entrada manual con texto de campaña, comprobación de salud Speaches y TTS Kokoro MP3. No guarda audiovisuales ni realiza publicación externa.
+- Grabación de este vídeo final: montaje local reproducible; n8n y el editor de JF CONNECT todavía requieren integración con almacenamiento privado/cola de renders.
