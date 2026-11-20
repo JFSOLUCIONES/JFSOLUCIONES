@@ -34,3 +34,13 @@ Separar eventos de conversación, llamadas de WhatsApp (si la Calling API corres
 > ¡Hola! Gracias por comunicarte con Policlínico AM-Medic. Estamos en Av. Perú 2714, segundo piso, San Martín de Porres. ¿Tu consulta es por licencia nueva, revalidación, recategorización o una cita? Te ayudaremos a comunicarte con recepción para confirmar los requisitos y la disponibilidad.
 
 No publicar el guion como respuesta automatizada sin validación de recepción, aprobación del titular y pruebas técnicas.
+
+
+## Auditoría adicional: Webhook 19/11/2026, 22:18 (Lima)
+- Capturas de Meta Developers muestran callback `https://n8n.jfconnect.online/webhook/meta-whatsapp` y campo `messages` **suscrito** en v26.0. No alterar esta configuración sin diagnóstico adicional.
+- La aplicación **AM-MEDIC Connect** del panel coincide con la aplicación registrada en la suscripción de la WABA consultada por Graph API.
+- GET de pertenencia de teléfonos WABA en n8n, ejecución **1013**: el identificador técnico del teléfono de AM-Medic corresponde a esa WABA. Esto no confirma su entrega al webhook.
+- Ejecuciones nuevas **998–1004** del webhook central, observadas el 19/11 aproximadamente a las 21:55–21:56 Perú: **todas corresponden al número del periódico NO+, ninguna a AM-Medic**. Se verificó por metadato de número receptor, sin registrar datos de remitentes ni contenido.
+- El usuario confirmó que su mensaje de prueba a AM-Medic mostró **dos checks grises**. Esto acredita entrega en WhatsApp, no entrega de webhook a JF CONNECT.
+- Estado operativo: **AM-MEDIC SIN EVENTO ENTRANTE VERIFICADO**. Próximas comprobaciones: modo Live/Development de la aplicación, registro y modalidad Cloud API / Business App / coexistencia y logs de entrega de Meta, incluyendo overrides por teléfono.
+- El flujo de otros clientes no se alteró. El webhook central no presenta una validación HMAC explícita en el grafo inspeccionado; **antes de activar respuestas automáticas** se requiere control de autenticidad y pruebas de extremo a extremo supervisadas.
