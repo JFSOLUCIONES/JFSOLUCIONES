@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "slug": "rosa-torrejon-lurin",
+  "nombre": "Rosa Torrejón — Lurín 2027–2030",
+  "categoria": "Comunicación institucional / Gestión pública",
+  "estado": "preproduccion_sin_contrato",
+  "cliente_institucional_verificado": false,
+  "alta_app_confirmada": false,
+  "inicio_actividades_preparatorias": "2026-11-20",
+  "inicio_comercial_objetivo": "2027-01-01",
+  "periodo_referencia": "2027-2030",
+  "ubicacion": "Lurín, Lima, Perú",
+  "colores_trabajo_provisionales": [
+    "#174F90",
+    "#53B5E5",
+    "#FFFFFF"
+  ],
+  "persona_contacto_verificada": false,
+  "telefono": null,
+  "email": null,
+  "direccion_oficial": null,
+  "url_oficial": null,
+  "workflow_piloto_n8n": "QiM3stZGn6fHwRXJ",
+  "publicacion_automatica": false,
+  "fuentes_media": "almacen_privado_no_versionado",
+  "nota": "Ficha técnica referencial, sin acreditación de contratación ni representación municipal."
+}
