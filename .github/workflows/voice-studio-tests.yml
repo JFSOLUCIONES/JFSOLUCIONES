@@ -1,0 +1,29 @@
+name: JF Voice Studio - policy tests
+
+on:
+  pull_request:
+    paths:
+      - 'tools/jf-voice-studio/**'
+      - '.github/workflows/voice-studio-tests.yml'
+  push:
+    branches:
+      - 'feat/jf-voice-video-studio-oss-20261120'
+    paths:
+      - 'tools/jf-voice-studio/**'
+      - '.github/workflows/voice-studio-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test rights and approval (no model or credentials)
+        working-directory: tools/jf-voice-studio
+        run: python -m unittest discover -s tests -v
