@@ -1,0 +1,16 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {createHmac} from "node:crypto";
+import {verifyMetaPost,routeJfSales} from "../src/jf-sales/meta-webhook-security.mjs";
+const raw=Buffer.from('{"entry":[{"changes":[]}]}',"utf8");
+const secret="integration-test-secret-only-12345";
+const sig="sha256="+createHmac("sha256",secret).update(raw).digest("hex");
+test("firma válida acepta bytes originales",()=>assert.equal(verifyMetaPost({rawBody:raw,signatureHeader:sig,appSecret:secret}),true));
+test("payload modificado rechaza firma",()=>assert.equal(verifyMetaPost({rawBody:Buffer.from(raw.toString()+" "),signatureHeader:sig,appSecret:secret}),false));
+test("sin firma rechaza",()=>assert.equal(verifyMetaPost({rawBody:raw,appSecret:secret}),false));
+test("sin secreto rechaza",()=>assert.equal(verifyMetaPost({rawBody:raw,signatureHeader:sig,appSecret:""}),false));
+test("body parseado y serializado no reemplaza raw",()=>assert.equal(verifyMetaPost({rawBody:JSON.parse(raw.toString()),signatureHeader:sig,appSecret:secret}),false));
+test("cliente ajeno conserva ruta original",()=>assert.equal(routeJfSales({signatureValid:true,phoneNumberId:"123456789123456",allowlistedPhoneNumberIds:new Set(["987654321987654"]),message:"hola",idempotentClaimed:true}).route,"PRESERVE_EXISTING_BOT"));
+test("sin firma válida bloquea",()=>assert.equal(routeJfSales({signatureValid:false,phoneNumberId:"987654321987654",allowlistedPhoneNumberIds:new Set(["987654321987654"]),message:"hola",idempotentClaimed:true}).route,"DENY_UNVERIFIED"));
+test("mensajes repetidos no enrutan",()=>assert.equal(routeJfSales({signatureValid:true,phoneNumberId:"987654321987654",allowlistedPhoneNumberIds:new Set(["987654321987654"]),message:"hola",idempotentClaimed:false}).route,"IGNORE_DUPLICATE_OR_UNCLAIMED"));
+test("cliente JF autorizado queda solo en borrador",()=>{const r=routeJfSales({signatureValid:true,phoneNumberId:"987654321987654",allowlistedPhoneNumberIds:new Set(["987654321987654"]),message:"hola",idempotentClaimed:true});assert.equal(r.route,"JF_SALES");assert.equal(r.externalSendingEnabled,false)});
