@@ -41,6 +41,10 @@ No requiere instalar dependencias ni utilizar tokens de Meta.
 
 **No incluir jamás tokens, claves de Meta, contraseñas, datos reales de denunciantes ni backups del VPS en este repositorio público.**
 
+## Patrimonio y legado digital JF SOLUCIONES
+
+[Índice maestro de sistemas y planes de reconstrucción](docs/LEGADO_DIGITAL_INICIO.md) — guía pública de continuidad empresarial, GitHub, n8n y VPS. Los desarrollos que aún estén en revisión figuran en sus Pull Requests; no se consideran restaurables hasta comprobar su recuperación.
+
 ## JF VOICE & VIDEO STUDIO (prototipo en revisión)
 
 El estudio de motores de voz, su arquitectura, controles de derechos y adaptador experimental TTS están documentados en [docs/jf-voice-studio/ESTUDIO_OSS_2026-11-20.md](docs/jf-voice-studio/ESTUDIO_OSS_2026-11-20.md) y [tools/jf-voice-studio/README.md](tools/jf-voice-studio/README.md). **No desplegado ni aprobado para producción.** Este módulo no sustituye ni modifica el proyecto editorial NO+.
