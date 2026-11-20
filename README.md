@@ -40,3 +40,7 @@ No requiere instalar dependencias ni utilizar tokens de Meta.
 6. Publicidad con Revive Adserver tras validación comercial, privacidad y seguridad.
 
 **No incluir jamás tokens, claves de Meta, contraseñas, datos reales de denunciantes ni backups del VPS en este repositorio público.**
+
+## Patrimonio y legado digital JF SOLUCIONES
+
+[Índice maestro de sistemas y planes de reconstrucción](docs/LEGADO_DIGITAL_INICIO.md) — guía pública de continuidad empresarial, GitHub, n8n y VPS. Los desarrollos que aún estén en revisión figuran en sus Pull Requests; no se consideran restaurables hasta comprobar su recuperación.
