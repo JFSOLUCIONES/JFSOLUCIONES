@@ -13,6 +13,7 @@ DOCUMENTS = [
     ROOT / "docs" / "LEGADO_DIGITAL_GUIA_DE_RECUPERACION.md",
     ROOT / "docs" / "MATRIZ_RECUPERACION_JF.md",
     ROOT / "docs" / "PLAN_QA_VOZ_VIDEO_2026.md",
+    ROOT / "docs" / "HOJA_RUTA_LEGADO_Y_STUDIO.md",
 ]
 def main() -> int:
     if not CATALOG.is_file() or any(not p.is_file() for p in DOCUMENTS):
