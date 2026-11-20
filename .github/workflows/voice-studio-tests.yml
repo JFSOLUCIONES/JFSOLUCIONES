@@ -27,3 +27,9 @@ jobs:
       - name: Test rights and approval (no model or credentials)
         working-directory: tools/jf-voice-studio
         run: python -m unittest discover -s tests -v
+      - name: Test FFmpeg voice reference preprocessing
+        working-directory: tools/jf-voice-studio
+        run: |
+          ffmpeg -hide_banner -loglevel error -f lavfi -i 'sine=frequency=440:duration=1' -y /tmp/jf-signal.wav
+          bash prepare_reference.sh /tmp/jf-signal.wav /tmp/jf-clean.wav
+          ffprobe -v error -select_streams a:0 -show_entries stream=channels,sample_rate -of csv=p=0 /tmp/jf-clean.wav | grep -qx '24000,1'
