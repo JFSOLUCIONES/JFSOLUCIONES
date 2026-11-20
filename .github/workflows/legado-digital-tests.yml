@@ -1,0 +1,33 @@
+name: Legado Digital - catálogo público
+on:
+  pull_request:
+    paths:
+      - 'docs/CATALOGO_ACTIVOS_PUBLICO.json'
+      - 'docs/*LEGADO*'
+      - 'docs/MATRIZ_RECUPERACION_JF.md'
+      - 'docs/PLAN_QA_VOZ_VIDEO_2026.md'
+      - 'docs/HOJA_RUTA_LEGADO_Y_STUDIO.md'
+      - 'ops/legado/**'
+      - '.github/workflows/legado-digital-tests.yml'
+  push:
+    branches: ['docs/jf-activos-digitales-20261119']
+    paths:
+      - 'docs/CATALOGO_ACTIVOS_PUBLICO.json'
+      - 'docs/*LEGADO*'
+      - 'docs/MATRIZ_RECUPERACION_JF.md'
+      - 'docs/PLAN_QA_VOZ_VIDEO_2026.md'
+      - 'ops/legado/**'
+      - '.github/workflows/legado-digital-tests.yml'
+permissions:
+  contents: read
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validar estructura y sumas sin secretos
+        run: python ops/legado/validate_catalog.py
