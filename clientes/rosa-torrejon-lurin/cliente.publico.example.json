@@ -11,8 +11,10 @@
   "periodo_referencia": "2027-2030",
   "ubicacion": "Lurín, Lima, Perú",
   "colores_trabajo_provisionales": [
-    "#174F90",
-    "#53B5E5",
+    "#00AEEF",
+    "#283878",
+    "#8B1E1E",
+    "#9E8329",
     "#FFFFFF"
   ],
   "persona_contacto_verificada": false,
@@ -23,5 +25,10 @@
   "workflow_piloto_n8n": "QiM3stZGn6fHwRXJ",
   "publicacion_automatica": false,
   "fuentes_media": "almacen_privado_no_versionado",
-  "nota": "Ficha técnica referencial, sin acreditación de contratación ni representación municipal."
+  "nota": "Ficha técnica interna referencial. Paleta celeste de pregestión actualizada 20/11/2026; no acredita manual oficial de partido ni contratación municipal.",
+  "escudo_municipal_pre2027_autorizado": false,
+  "marca_agua_pregestion": "ROSA TORREJÓN | LURÍN 2027–2030 (sin escudo municipal)",
+  "identidad_municipal_y_partidaria_separadas": true,
+  "estado_electoral_para_publicaciones": "virtual electa hasta documentar proclamación y credencial individuales",
+  "comunicacion_municipal_institucional_solo_con_autorizacion": true
 }
