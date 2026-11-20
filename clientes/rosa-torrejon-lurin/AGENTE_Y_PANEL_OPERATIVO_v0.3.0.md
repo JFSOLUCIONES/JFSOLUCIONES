@@ -40,3 +40,11 @@ Los 7 PDF originales de Lurín y CONADIS se conservaron en Google Drive privado;
 - Ejecución de prueba manual N° `1280`: `success`; se comprobó GET del portal https://www.gob.pe/munilurin y recepción de 237,447 caracteres HTML a las 20:59:55 UTC.
 - **Estado real:** prueba de conectividad de un portal; sin revisión automatizada de todo el contenido, extracción de indicadores, consulta MEF/Contraloría/OECE/INEI o difusión. Flujo inactivo, sin cron. No confundir con agente investigativo autónomo.
 - Evolución prevista: almacenar fuente/fecha/URL/resultados públicos en capa privada por tenant, extracción controlada, validación humana, eventual orquestación de agentes reutilizando JF CONNECT AI/n8n y herramientas técnicas ya conocidas como OpenJarvis/CrewAI previa prueba, sin duplicar JF Studio.
+
+## Complemento v0.3.1 — Accesos rápidos de inicio (paridad MDP)
+El 20/11/2026 se comparó la configuración del plugin privado **MDP Institucional Pro v1.5.2** y se actualizó Rosa Torrejón Pro a **v0.3.1**:
+- Manifiesto `defaultPrompt` ahora contiene **seis prompts de inicio** para panel de acciones, plan diario, flyer, radar, auditoría y agente investigador.
+- Skill `rosa-panel-operativo` ampliada con botones conversacionales contextuales después de planes, piezas y auditorías.
+- Conservados icono, nombre y assets existentes; añadidos `README.md` y fuentes públicas de control.
+- El complemento se actualizó bajo el mismo identificador privado `plugins_6af8d1249d1c81918292739085d2d1a1`; no se creó un clon.
+- Versiones del complemento y del proyecto pueden leerse juntas; **no existe sincronización técnica automática** entre las Fuentes de ChatGPT y los archivos del plugin.
