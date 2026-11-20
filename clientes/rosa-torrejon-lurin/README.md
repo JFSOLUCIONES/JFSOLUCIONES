@@ -11,7 +11,7 @@ Centralizar versiones no sensibles de briefs, formatos, protocolos de producció
 - Denominación interna: Rosa Torrejón — Lurín 2027–2030.
 - Slug técnico propuesto: `rosa-torrejon-lurin`.
 - Categoría: comunicación institucional / gobierno local.
-- **Paleta de pregestión vigente 20/11/2026**: celeste Renovación Popular `#00AEEF` (rector), azul marino `#283878`, carmesí `#8B1E1E`, dorado ocre `#9E8329` y blanco. Códigos propuestos para producción, no manual partidario certificado. **NO USAR el escudo municipal antes del 01/01/2027 en contenido personal/político**.
+- **Paleta de pregestión vigente, CORREGIDA 20/11/2026**: **blanco `#FFFFFF` PREDOMINANTE** como fondo y espacio negativo (orientativo 65–70 % de superficies gráficas); celeste Renovación Popular `#00AEEF` como acento identificador (20–25 %); azul marino `#283878` para títulos y contraste; carmesí `#8B1E1E` y dorado ocre `#9E8329` como pequeños acentos (en conjunto 5–10 %). Los porcentajes son guía compositiva, no identidad oficial certificada. Códigos propuestos para producción, no manual partidario certificado. **NO USAR el escudo municipal antes del 01/01/2027 en contenido personal/político**.
 - Contacto, correo, teléfono, contrato y titular facturable: por verificar, NUNCA inventar.
 - Estado en panel `ai.jfconnect.online`: **alta NO verificada**, falta usar el formulario administrativo autorizado.
 
@@ -47,3 +47,6 @@ Esta carpeta está en un repositorio **público**. No alojar aquí fotografías 
 
 ## Nueva regla vigente de identidad y transición (20/11/2026)
 Durante 2026 Rosa es alcaldesa virtual electa, no autoridad en funciones. Las marcas de agua experimentales que mezclaron el escudo municipal con su nombre quedan bloqueadas para publicación antes de asumir. El canal partidario/personal y el canal municipal institucional de 2027 se producirán por separado. El escudo institucional, cuando su uso esté autorizado, debe conservarse original, nunca reconstruirse ni combinarse con propaganda partidaria. Véase `INSTRUCCIONES_CHATGPT_PROYECTO_V1.md`.
+
+### Norma de diseño prioritaria (20/11/2026)
+**EL BLANCO ES EL COLOR DOMINANTE**. No sustituirlo por fondo celeste masivo ni por azul marino. En videos, títulos, placas, miniaturas y flyers usar estética limpia y luminosa; celeste para bandas, filetes y detalles. Las marcas de agua deben tener versión clara y versión invertida para garantizar legibilidad sobre cualquier foto. Ninguna incluye escudo municipal durante la transición. Esta regla prevalece sobre cualquier descripción previa de «celeste dominante».
