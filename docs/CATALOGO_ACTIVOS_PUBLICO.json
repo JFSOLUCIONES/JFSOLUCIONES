@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-19",
-  "disclaimer": "Inventario público sin secretos; los estados son verificaciones limitadas, no pruebas integrales de disponibilidad.",
+  "updated_at": "2026-11-20",
+  "disclaimer": "Catálogo PÚBLICO no sensible. No contiene respaldos, secretos, rutas internas, IDs de credenciales, expedientes ni código fuente completo de clientes. Estado de contenedores no equivale a restauración funcional.",
   "assets": [
     {
       "id": "jf-gestion360",
@@ -35,9 +35,9 @@
       "id": "jf-sports-edge",
       "category": "deportes",
       "name": "JF SPORTS EDGE AI",
-      "status": "desarrollo",
+      "status": "staging_detectado",
       "admin_url": "https://gestion360.jfconnect.online/admin/sistemas/jf-sports-edge-ai/",
-      "verification": "motor CORE independiente no desplegado a 2026-11-19"
+      "verification": "2026-11-20 VPS1 auditoría 1247 detectó staging API; no valida funcionamiento de producción ni código completo"
     },
     {
       "id": "jf-studio",
@@ -56,6 +56,173 @@
       "category": "cliente",
       "name": "NO+",
       "status": "estado_no_verificado"
+    },
+    {
+      "id": "jf-voice-video-studio",
+      "category": "produccion_audiovisual",
+      "name": "JF VOICE & VIDEO STUDIO",
+      "status": "tts_kokoro_probado_prototipo_clonacion",
+      "code_reference": "https://github.com/JFSOLUCIONES/JFSOLUCIONES/pull/4",
+      "verification": "TTS Kokoro 1256 success, Chatterbox no desplegado, control licencias 1251 success"
+    },
+    {
+      "id": "jf-china",
+      "category": "comercio",
+      "name": "JF CHINA",
+      "status": "workflows_visibles_no_restauracion_verificada"
+    },
+    {
+      "id": "jf-sales",
+      "category": "crm",
+      "name": "JF SALES / COMERCIAL",
+      "status": "desarrollo",
+      "code_reference": "https://github.com/JFSOLUCIONES/JFSOLUCIONES/pull/2"
+    },
+    {
+      "id": "jf-academy",
+      "category": "educacion",
+      "name": "JF ACADEMY",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "jf-digital",
+      "category": "servicios",
+      "name": "JF DIGITAL",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "jf-elecciones",
+      "category": "aplicaciones",
+      "name": "JF ELECCIONES",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "jf-creditos360",
+      "category": "finanzas",
+      "name": "JF CREDITOS360",
+      "status": "staging_detectado"
+    },
+    {
+      "id": "jf-postiz",
+      "category": "programacion_social",
+      "name": "JF POSTIZ",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "am-medic",
+      "category": "cliente",
+      "name": "AM-MEDIC",
+      "status": "servicio_detectado_no_restauracion_verificada"
+    },
+    {
+      "id": "jf-stream",
+      "category": "media",
+      "name": "JF STREAM",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "jf-e4",
+      "category": "aplicaciones",
+      "name": "JF E4G / E4F",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "cuyvalle-digital",
+      "category": "cliente",
+      "name": "Cuyvalle Digital",
+      "status": "infraestructura_detectada"
+    },
+    {
+      "id": "jf-meta",
+      "category": "integraciones",
+      "name": "JF META",
+      "status": "workflows_visibles"
+    }
+  ],
+  "audit_summary": {
+    "observed_at": "2026-11-20",
+    "n8n_visible_workflows": 110,
+    "n8n_active": 43,
+    "n8n_inactive": 67,
+    "github_repos_visible": 1,
+    "github_repo": "JFSOLUCIONES/JFSOLUCIONES",
+    "github_repo_visibility": "public",
+    "vps1_audit_execution": "1247",
+    "vps2_audit_execution": "1248",
+    "kokoro_test_execution": "1256",
+    "oss_gate_execution": "1251",
+    "confidence": "inventario_parcial_lectura"
+  },
+  "n8n_aggregates": [
+    {
+      "family": "JF CONTROL AI",
+      "total": 20,
+      "activos": 13
+    },
+    {
+      "family": "JF CHINA",
+      "total": 12,
+      "activos": 11
+    },
+    {
+      "family": "CERTSE FAP",
+      "total": 36,
+      "activos": 2
+    },
+    {
+      "family": "NO+",
+      "total": 10,
+      "activos": 5
+    },
+    {
+      "family": "AM-MEDIC",
+      "total": 9,
+      "activos": 3
+    },
+    {
+      "family": "JF SPORTS EDGE",
+      "total": 4,
+      "activos": 2
+    },
+    {
+      "family": "JF VOICE",
+      "total": 3,
+      "activos": 0
+    },
+    {
+      "family": "JF META",
+      "total": 3,
+      "activos": 1
+    },
+    {
+      "family": "JF STUDIO",
+      "total": 2,
+      "activos": 0
+    },
+    {
+      "family": "JF SALES",
+      "total": 4,
+      "activos": 0
+    },
+    {
+      "family": "JF ACADEMY",
+      "total": 2,
+      "activos": 2
+    },
+    {
+      "family": "JF DIGITAL",
+      "total": 1,
+      "activos": 1
+    },
+    {
+      "family": "JF CONNECT",
+      "total": 2,
+      "activos": 2
+    },
+    {
+      "family": "Otros",
+      "total": 2,
+      "activos": 1
     }
   ]
 }
