@@ -33,3 +33,10 @@ Este protocolo NO significa agente autónomo 24/7 instalado. Las automatizacione
 
 ## Soportes privados
 Los 7 PDF originales de Lurín y CONADIS se conservaron en Google Drive privado; no subir documentos con fotos, audios, contactos, contratos o secretos a GitHub público. Para que aparezcan como fuentes nativas del proyecto ChatGPT, el usuario debe añadirlos desde la pestaña Fuentes.
+
+## Piloto n8n real (20/11/2026)
+- Flujo: [JF LURIN | Agente Radar Oficial - PILOTO LECTURA, NO PUBLICA](https://n8n.jfconnect.online/workflow/7x3t8M7UOxxk03n4)
+- ID n8n: `7x3t8M7UOxxk03n4`; creado en proyecto personal `JF CONNECT <jfsolucionesonline@gmail.com>`, no en un equipo municipal.
+- Ejecución de prueba manual N° `1280`: `success`; se comprobó GET del portal https://www.gob.pe/munilurin y recepción de 237,447 caracteres HTML a las 20:59:55 UTC.
+- **Estado real:** prueba de conectividad de un portal; sin revisión automatizada de todo el contenido, extracción de indicadores, consulta MEF/Contraloría/OECE/INEI o difusión. Flujo inactivo, sin cron. No confundir con agente investigativo autónomo.
+- Evolución prevista: almacenar fuente/fecha/URL/resultados públicos en capa privada por tenant, extracción controlada, validación humana, eventual orquestación de agentes reutilizando JF CONNECT AI/n8n y herramientas técnicas ya conocidas como OpenJarvis/CrewAI previa prueba, sin duplicar JF Studio.
