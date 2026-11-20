@@ -11,7 +11,7 @@ Centralizar versiones no sensibles de briefs, formatos, protocolos de producció
 - Denominación interna: Rosa Torrejón — Lurín 2027–2030.
 - Slug técnico propuesto: `rosa-torrejon-lurin`.
 - Categoría: comunicación institucional / gobierno local.
-- Paleta de trabajo provisional: azul `#174F90`, celeste `#53B5E5` y blanco `#FFFFFF`. No se afirma que sean colores oficiales.
+- **Paleta de pregestión vigente 20/11/2026**: celeste Renovación Popular `#00AEEF` (rector), azul marino `#283878`, carmesí `#8B1E1E`, dorado ocre `#9E8329` y blanco. Códigos propuestos para producción, no manual partidario certificado. **NO USAR el escudo municipal antes del 01/01/2027 en contenido personal/político**.
 - Contacto, correo, teléfono, contrato y titular facturable: por verificar, NUNCA inventar.
 - Estado en panel `ai.jfconnect.online`: **alta NO verificada**, falta usar el formulario administrativo autorizado.
 
@@ -35,7 +35,7 @@ Esta carpeta está en un repositorio **público**. No alojar aquí fotografías 
 ## Criterios de verificación
 - [ ] Alta real del cliente en JF CONNECT AI y captura/ID verificado.
 - [ ] Contacto y autorización por escrito.
-- [ ] Logotipo y paleta oficiales confirmados.
+- [ ] Marca personal/política pregestión sin escudo municipal aprobada; desde 2027 identidad oficial municipal verificada y separada del partido.
 - [ ] Guion y pieza CONADIS aprobados.
 - [ ] Contrato o prestación formal habilitada.
 - [ ] Primera producción conformada.
@@ -44,3 +44,6 @@ Esta carpeta está en un repositorio **público**. No alojar aquí fotografías 
 ## Fuentes públicas
 - Agencia Andina (ONPE Lima, resultados municipales 2026): https://andina.pe/agencia/noticia-conoce-a-los-virtuales-alcaldes-lima-con-100-actas-contabilizadas-onpe-1097140.aspx
 - Defensoría del Pueblo, período 2027–2030: https://www.defensoria.gob.pe/supervision-elecciones-regionales-2026/
+
+## Nueva regla vigente de identidad y transición (20/11/2026)
+Durante 2026 Rosa es alcaldesa virtual electa, no autoridad en funciones. Las marcas de agua experimentales que mezclaron el escudo municipal con su nombre quedan bloqueadas para publicación antes de asumir. El canal partidario/personal y el canal municipal institucional de 2027 se producirán por separado. El escudo institucional, cuando su uso esté autorizado, debe conservarse original, nunca reconstruirse ni combinarse con propaganda partidaria. Véase `INSTRUCCIONES_CHATGPT_PROYECTO_V1.md`.
