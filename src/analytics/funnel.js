@@ -32,9 +32,9 @@ export function calcularEmbudo(registro) {
     coste_por_cita_pen: divide(m.gasto_pen,m.citas_confirmadas),
     tasa_asistencia_pct: pct(m.citas_atendidas,m.citas_confirmadas),
     advertencias: [
-      ...(m.conversaciones_meta===null?'No hay conversaciones Meta verificadas; no inferir cero.':[]),
-      ...(m.conversaciones_webhook===null?'No hay eventos webhook verificados; no inferir cero.':[]),
-      ...(m.citas_confirmadas===null?'No hay agenda confirmada; no inferir cero.':[])
+      ...(m.conversaciones_meta===null? ['No hay conversaciones Meta verificadas; no inferir cero.'] : []),
+      ...(m.conversaciones_webhook===null? ['No hay eventos webhook verificados; no inferir cero.'] : []),
+      ...(m.citas_confirmadas===null? ['No hay agenda confirmada; no inferir cero.'] : [])
     ]
   };
 }
