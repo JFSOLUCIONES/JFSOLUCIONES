@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "slug": "rosa-torrejon-lurin",
+  "nombre": "Rosa Torrejón — Lurín 2027–2030",
+  "categoria": "Comunicación institucional / Gestión pública",
+  "estado": "preproduccion_sin_contrato",
+  "cliente_institucional_verificado": false,
+  "alta_app_confirmada": false,
+  "inicio_actividades_preparatorias": "2026-11-20",
+  "inicio_comercial_objetivo": "2027-01-01",
+  "periodo_referencia": "2027-2030",
+  "ubicacion": "Lurín, Lima, Perú",
+  "colores_trabajo_provisionales": [
+    "#FFFFFF",
+    "#00AEEF",
+    "#283878",
+    "#8B1E1E",
+    "#9E8329"
+  ],
+  "persona_contacto_verificada": false,
+  "telefono": null,
+  "email": null,
+  "direccion_oficial": null,
+  "url_oficial": null,
+  "workflow_piloto_n8n": "QiM3stZGn6fHwRXJ",
+  "publicacion_automatica": false,
+  "fuentes_media": "almacen_privado_no_versionado",
+  "nota": "Paleta de PREPRODUCCIÓN: el blanco predomina. Celeste identifica a Renovación Popular pero no domina los fondos. Códigos no sustituyen manual oficial ni autorización; sin contrato municipal.",
+  "escudo_municipal_pre2027_autorizado": false,
+  "marca_agua_pregestion": "ROSA TORREJÓN | LURÍN 2027–2030 (sin escudo municipal)",
+  "identidad_municipal_y_partidaria_separadas": true,
+  "estado_electoral_para_publicaciones": "virtual electa hasta documentar proclamación y credencial individuales",
+  "comunicacion_municipal_institucional_solo_con_autorizacion": true,
+  "color_predominante": "#FFFFFF",
+  "regla_jerarquia_color": "Blanco predominante (65–70 % orientativo); celeste identificador (20–25 %); azul marino para texto; carmesí y dorado pequeños acentos (5–10 % conjunto).",
+  "variantes_marca_de_agua": [
+    "oscuro_con_contorno_blanco",
+    "claro_con_contraste_azul"
+  ]
+}
