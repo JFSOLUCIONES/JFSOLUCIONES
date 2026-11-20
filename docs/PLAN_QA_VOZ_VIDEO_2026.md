@@ -4,7 +4,7 @@ Fecha: 2026-11-20 · Documento público y no sensible.
 ## Alcance verificado
 n8n verificó la generación de voz Kokoro en workflow s3FbmAefttTQMF79, ejecución 1256, y el bloqueo editorial en workflow e9LjSHJ6fnb48bQl, ejecución 1251. No se ejecutó clonación de voz.
 
-Un video de laboratorio con FFmpeg y un narrador genérico sería una prueba técnica de ensamblaje, NO una demostración de voz clonada ni un spot final para un cliente.
+Se creó un video de laboratorio con FFmpeg y narrador genérico (21,6 s, 720x1280, H.264/AAC, subtítulos mov_text). Se comprobó su decodificación local y el pipeline reproducible de GitHub Actions N° 44800714607. NO es un clon vocal ni una pieza para cliente.
 
 ## Matriz de aceptación
 | Etapa | Evidencia exigida | Estado al 20/11/2026 |
@@ -18,7 +18,7 @@ Un video de laboratorio con FFmpeg y un narrador genérico sería una prueba té
 | CosyVoice 3 | Evaluación de prosodia en español | PENDIENTE |
 | Música/voces | Separación con Demucs | PENDIENTE |
 | Subtítulos | STT y SRT con timestamps | PENDIENTE |
-| Montaje MP4 | H.264/AAC y ffprobe | PRUEBA LOCAL |
+| Montaje MP4 | H.264/AAC, mov_text, decodificación y ffprobe | PASS en laboratorio + CI 44800714607 |
 | Panel JF CONNECT AI | Upload, voz, colas, preview, exportación, permisos | NO VERIFICADO |
 | Backup/restore | Restauración cifrada aislada | PENDIENTE |
 | Publicación | Aprobación humana y log | NO ACTIVADA |
