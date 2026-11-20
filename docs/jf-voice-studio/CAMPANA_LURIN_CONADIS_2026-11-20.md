@@ -51,3 +51,9 @@ Seguimos trabajando por un distrito con más derechos, accesibilidad y oportunid
 - Proyecto n8n personal `JF CONNECT <jfsolucionesonline@gmail.com>`.
 - Entrada manual con texto de campaña, comprobación de salud Speaches y TTS Kokoro MP3. No guarda audiovisuales ni realiza publicación externa.
 - Grabación de este vídeo final: montaje local reproducible; n8n y el editor de JF CONNECT todavía requieren integración con almacenamiento privado/cola de renders.
+
+## Validación adicional del motor n8n
+- Ejecución manual N° **1263** del workflow QiM3stZGn6fHwRXJ: finalización `success`.
+- Comprobación de salud de Speaches y síntesis Kokoro realizadas correctamente; nodo final contiene un MP3 binario de **207 kB**.
+- MP4 social alternativo con subtítulos visibles 1080 × 1920 y 52,33 s preparado y decodificado localmente.
+- La pista provisional del MP4 de muestra no fue reemplazada por el audio binario n8n, cuya entrega al montaje requiere una integración de archivos/almacenamiento autorizada.
