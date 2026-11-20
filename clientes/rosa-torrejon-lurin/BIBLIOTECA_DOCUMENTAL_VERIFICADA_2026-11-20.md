@@ -31,3 +31,13 @@ Cada investigación debe registrar URL exacta, organismo, filtros, fecha de cons
 - Contrato o autorización institucional de JF SOLUCIONES, todavía no acreditados.
 
 **Privacidad:** Este archivo solo contiene títulos y hechos públicos. PDF originales y medios permanecen en Drive privado. No confundir documento incluido en Drive con documento cargado en Fuentes de ChatGPT.
+
+## Copia consolidada verificable del PDLC
+Se unieron sin modificar las páginas de tres partes (135 + 135 + 138 páginas = **408 páginas**) en `PDLC_LURIN_2024_2034_UNIFICADO_408_PAGINAS.pdf`, SHA-256 abreviado `1ae1c442b721978687cd`. Esta es una copia técnica de consulta, no un original firmado distinto ni una nueva ordenanza.
+Archivo privado: https://drive.google.com/file/d/1YvjPSPwcLBD1gjb5iOpb_EqxGOHvzddV/view?usp=drivesdk
+
+## Fuentes nuevas de instrucciones (para agregar manualmente a ChatGPT > Fuentes)
+- `05_PANEL_Y_AGENTE_LURIN.md`: comandos de paridad y agente supervisado.
+- `06_FUENTES_PRIMARIAS_LURIN_20-11-2026.md`: matriz de 7 PDF, portales dinámicos y normativa.
+- `07_CONTROL_QA_Y_GOBERNANZA.md`: controles editoriales y jurídicos.
+Los tres se guardaron en la carpeta privada 07_FUENTES_OFICIALES_Y_NORMATIVA de Drive junto con originales. La disponibilidad en Drive no significa carga automática al proyecto ChatGPT.
