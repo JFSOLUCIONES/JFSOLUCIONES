@@ -30,10 +30,19 @@ jobs:
       - name: Install FFmpeg for media smoke test
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends ffmpeg
+          sudo apt-get install -y --no-install-recommends ffmpeg espeak fonts-dejavu-core
       - name: Test FFmpeg voice reference preprocessing
         working-directory: tools/jf-voice-studio
         run: |
           ffmpeg -hide_banner -loglevel error -f lavfi -i 'sine=frequency=440:duration=1' -y /tmp/jf-signal.wav
           bash prepare_reference.sh /tmp/jf-signal.wav /tmp/jf-clean.wav
           ffprobe -v error -select_streams a:0 -show_entries stream=channels,sample_rate -of csv=p=0 /tmp/jf-clean.wav | grep -qx '24000,1'
+
+      - name: Test montage MP4 + AAC + SRT as timed mov_text (generic synthetic voice)
+        working-directory: tools/jf-voice-studio
+        run: |
+          espeak -v es -s 130 -w /tmp/jf-generic.wav 'Prueba de laboratorio de JF Soluciones. Voz generica sintetica.'
+          bash render_video_smoke.sh /tmp/jf-generic.wav demo_subtitles.srt /tmp/jf-smoke.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 /tmp/jf-smoke.mp4 | grep -qx 'h264,720,1280'
+          ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 /tmp/jf-smoke.mp4 | grep -qx aac
+          ffprobe -v error -select_streams s:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 /tmp/jf-smoke.mp4 | grep -qx mov_text
