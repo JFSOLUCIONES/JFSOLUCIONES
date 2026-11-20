@@ -6,6 +6,7 @@ on:
       - 'docs/*LEGADO*'
       - 'docs/MATRIZ_RECUPERACION_JF.md'
       - 'docs/PLAN_QA_VOZ_VIDEO_2026.md'
+      - 'docs/HOJA_RUTA_LEGADO_Y_STUDIO.md'
       - 'ops/legado/**'
       - '.github/workflows/legado-digital-tests.yml'
   push:
