@@ -55,3 +55,12 @@ Inspección de `football-json/2025-26/de.1.json` realizada en VPS1 y reportada p
 **Precaución:** La muestra puede estar sesgada por ausencia de resultados. No reemplazar las doce observaciones con marcadores inventados o derivados de la salida del modelo. Auditoría pendiente: enumerar ID/fecha/equipos/jornada de los faltantes, identificar el motivo y verificar con otra fuente con derechos adecuados; después volver a evaluar con el mismo protocolo y sin usar datos futuros.
 
 Esta observación se basa en el resultado de terminal aportado por el operador; no se ha descargado el archivo completo al repositorio de GitHub.
+
+
+## CORRECCIÓN CRÍTICA: los 12 partidos eran empates 0–0 (21/11/2026)
+
+**El diagnóstico anterior de «marcadores ausentes» queda RECTIFICADO.** Consultamos directamente el archivo original `openfootball/football.json/2025-26/de.1.json` en GitHub (blob SHA `320994ff4b376c0aa7abe7929f9b9740cfc0eff5`) y verificamos que los 12 partidos listados como «sin marcador» tienen el campo **`"score": [0,0]`**. Otros partidos están codificados mediante `"score": {"ft": [local, visitante]}`.
+
+El lector original `learn_offline.py` solo leía `match["score"]["ft"]`, por lo que descartó sistemáticamente 12 empates 0–0 en el holdout. Este sesgo de selección puede afectar a exactitud, Brier, log-loss y calibración. **Retirar de cualquier presentación comercial la exactitud 55,78 %, el ECE 8,13 % y la conclusión de mejora hasta recalcular.** No asumir que los datos faltan en el proveedor ni completar con valores imaginarios.
+
+Reparación propuesta: aceptar las listas `[0,0]` para temporadas históricas ya finalizadas, mantener exclusión de encuentros futuros o no verificados en la temporada corriente, recalcular train/calibrate/test sin fugas y documentar cambios. Los números corregidos están **pendientes de ejecución** en VPS1.
