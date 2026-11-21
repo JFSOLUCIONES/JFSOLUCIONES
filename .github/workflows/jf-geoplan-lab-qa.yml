@@ -1,0 +1,39 @@
+name: JF GeoPlan 360 · Laboratorio QA
+on:
+  push:
+    paths:
+      - 'prototypes/jf-geoplan-360/**'
+      - '.github/workflows/jf-geoplan-lab-qa.yml'
+  pull_request:
+    paths:
+      - 'prototypes/jf-geoplan-360/**'
+      - '.github/workflows/jf-geoplan-lab-qa.yml'
+permissions:
+  contents: read
+jobs:
+  geometry-and-auth:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototypes/jf-geoplan-360/backend_v03
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install reference dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run tenancy, subscription, geometry and review tests
+        run: python -m pytest -q tests/
+  ui-logic:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototypes/jf-geoplan-360/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests no npm dependencies
+        run: node --test tests.mjs
