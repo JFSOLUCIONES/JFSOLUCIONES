@@ -1,0 +1,40 @@
+/* JF GeoPlan 360 — tema de demostración, NO producción.
+ * Diseño blanco predominante, marino JF y celeste técnico.
+ * Selectores aislados para no alterar otras vistas de Gestión360.
+ */
+.jf-geoplan {
+  --jf-page: #f5f8fc;
+  --jf-surface: #fff;
+  --jf-ink: #152d48;
+  --jf-muted: #597188;
+  --jf-primary: #133c70;
+  --jf-primary-hover: #0b2b53;
+  --jf-accent: #00a6d6;
+  --jf-gold: #ba9137;
+  --jf-line: #d9e6f1;
+  --jf-shadow: 0 8px 24px rgba(14, 44, 75, .07);
+  background: var(--jf-page);
+  color: var(--jf-ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  min-height: 100%;
+}
+.jf-geoplan *,
+.jf-geoplan *::before,
+.jf-geoplan *::after { box-sizing: border-box; }
+.jf-geoplan .jp-topbar { background: var(--jf-primary); color:#fff; padding: 1rem 1.5rem; }
+.jf-geoplan .jp-layout { max-width:1400px; margin:auto; padding:1.5rem; }
+.jf-geoplan .jp-title { font-size:clamp(1.5rem,2.8vw,2.25rem); margin:0; letter-spacing:-.025em; }
+.jf-geoplan .jp-subtitle { color:var(--jf-muted); line-height:1.5; }
+.jf-geoplan .jp-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
+.jf-geoplan .jp-card { background:#fff; border:1px solid var(--jf-line); border-radius:14px; padding:1.25rem; box-shadow:var(--jf-shadow); }
+.jf-geoplan .jp-card h3 { margin:.1rem 0 .7rem; font-size:.9rem; font-weight:650; }
+.jf-geoplan .jp-value { font-size:1.6rem; font-weight:750; color:var(--jf-primary); }
+.jf-geoplan .jp-label { color:var(--jf-muted); font-size:.8rem; }
+.jf-geoplan .jp-btn { cursor:pointer; display:inline-flex; align-items:center; justify-content:center; min-height:42px; background:var(--jf-primary); color:#fff; border:1px solid var(--jf-primary); border-radius:9px; padding:.6rem 1rem; font-weight:600; }
+.jf-geoplan .jp-btn:hover { background:var(--jf-primary-hover); }
+.jf-geoplan .jp-btn:focus-visible { outline:3px solid var(--jf-accent); outline-offset:3px; }
+.jf-geoplan .jp-status { color:#126a84; background:#e8f8fd; padding:.3rem .65rem; border-radius:30px; font-size:.8rem; }
+.jf-geoplan .jp-map-frame { background:#fff; border:1px solid var(--jf-line); border-left:4px solid var(--jf-accent); border-radius:14px; min-height:300px; }
+@media (max-width:900px) { .jf-geoplan .jp-grid {grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media (max-width:580px) { .jf-geoplan .jp-grid {grid-template-columns:1fr;} .jf-geoplan .jp-layout {padding:1rem;} }
+@media (prefers-reduced-motion:reduce) { .jf-geoplan * { transition:none!important; animation:none!important; } }
