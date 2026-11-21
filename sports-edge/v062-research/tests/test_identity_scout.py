@@ -104,4 +104,13 @@ class LineupEvidenceTests(unittest.TestCase):
         report=normalize_team_report(scout(),as_of=AT,kickoff_utc=KICK)
         self.assertNotIn('win_probability_adjustment',report)
 
+    def test_stale_confirmed_lineup_rejected(self):
+        s=scout();s['lineup']['confirmed_at']='2026-11-19T09:00:00Z'
+        with self.assertRaisesRegex(ScoutError,'lineup_confirmation_stale'):
+            normalize_team_report(s,as_of=AT,kickoff_utc=KICK)
+    def test_stale_absence_record_rejected(self):
+        s=scout();s['absences'][0]['observed_utc']='2026-11-19T09:00:00Z'
+        with self.assertRaisesRegex(ScoutError,'absence_stale'):
+            normalize_team_report(s,as_of=AT,kickoff_utc=KICK)
+
 if __name__=='__main__':unittest.main()
