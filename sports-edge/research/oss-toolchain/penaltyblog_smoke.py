@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from math import isfinite, log
 
-from penaltyblog.models import DixonColesGoalsModel, PoissonGoalsModel
+from penaltyblog.models import DixonColesGoalModel, PoissonGoalsModel
 
 
 def generate_synthetic_matches() -> list[tuple[str, str, int, int]]:
@@ -61,7 +61,7 @@ def main() -> None:
         raise ValueError("INVALID_SPLIT")
     results = [
         evaluate(PoissonGoalsModel, training, holdout),
-        evaluate(DixonColesGoalsModel, training, holdout),
+        evaluate(DixonColesGoalModel, training, holdout),
     ]
     print(
         json.dumps(
