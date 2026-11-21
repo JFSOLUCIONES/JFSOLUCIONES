@@ -6,6 +6,7 @@
 
 | Objetivo | Proveedor / código | Evaluación |
 |---|---|---|
+| Archivo histórico de Bundesliga (desde 1963/64) | https://github.com/openfootball/deutschland | Datos en dominio público; comprobar por temporada completitud y cambios de formato; no equivale a estadísticas modernas de jugadores. |
 | Datos históricos de largo alcance | https://github.com/openfootball/football.json | CC0-1.0; cobertura según liga, equipos y temporada. No es tiempo real. |
 | Fixture y marcador del piloto | https://www.openligadb.de | Ya conectado en v0.5.x; respetar ODbL, atribución y caché. |
 | Lesiones, sanciones, titulares, suplentes, jugadores, estadísticas y cuotas | https://www.api-football.com/documentation-v3 | Preferido para primer piloto. Comprobar coverage.injuries/lineups/players/statistics/odds por liga y temporada. |
