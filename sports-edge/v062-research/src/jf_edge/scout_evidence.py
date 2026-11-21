@@ -53,6 +53,7 @@ def normalize_team_report(raw, *, as_of, kickoff_utc):
     if state=='confirmed':
         confirmation=_time(lineup.get('confirmed_at'))
         if confirmation>now:raise ScoutError('future_lineup_confirmation')
+        if now-confirmation>timedelta(hours=24):raise ScoutError('lineup_confirmation_stale')
     absence_status=raw.get('absence_status','partial')
     if absence_status not in ('verified_complete','partial','unavailable'):
         raise ScoutError('absence_status_invalid')
@@ -70,6 +71,7 @@ def normalize_team_report(raw, *, as_of, kickoff_utc):
         if type(player) not in (str,int) or not str(player):raise ScoutError('absence_player_invalid')
         at=_time(record.get('observed_utc'))
         if at>now:raise ScoutError('future_absence')
+        if now-at>timedelta(hours=24):raise ScoutError('absence_stale')
         absence_ids.append(str(player))
     if len(set(absence_ids))!=len(absence_ids):raise ScoutError('duplicate_absence')
     if set(absence_ids)&set(starters):raise ScoutError('starter_listed_absent')
