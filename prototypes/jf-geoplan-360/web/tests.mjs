@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {layoutTwoPitches,finance,parsePlanarPoints,calculatePlanarPolygon,exportDXFR12,safeCatalogUrl} from './logic.mjs';
+test('dos canchas F6 colocadas en terreno 80 x 60',()=>{const l=layoutTwoPitches(80,60,'f6');assert.equal(l.fits,true);assert.equal(l.playingArea,2000);assert.equal(l.plotArea,4800);assert.equal(l.pitches.length,2);assert.ok(l.pitches[0].x+l.pitches[0].width<l.pitches[1].x);});
+test('F7 encaja en 80 x 80',()=>{const l=layoutTwoPitches(80,80,'f7');assert.equal(l.fits,true);assert.equal(l.plotArea,6400);});
+test('lote insuficiente bloqueado',()=>assert.equal(layoutTwoPitches(45,55,'f7').fits,false));
+test('rechaza dimensiones inválidas',()=>assert.throws(()=>layoutTwoPitches(-10,60,'f6'),RangeError));
+test('simulador financiero base',()=>{const f=finance();assert.equal(f.revenue,21000);assert.equal(f.cashflow,9400);assert.ok(f.payback>6&&f.payback<7);});
+test('no hay payback con pérdidas',()=>{const f=finance({hoursPerPitch:1});assert.equal(f.payback,null);});
+test('polígono métrico 100 x 50',()=>{const p=parsePlanarPoints('A,500000,9250000\nB,500100,9250000\nC,500100,9250050\nD,500000,9250050');const r=calculatePlanarPolygon(p);assert.equal(r.area,5000);assert.equal(r.perimeter,300);assert.equal(exportDXFR12(p).match(/\nLINE\n/g).length,4);});
+test('polígono degenerado bloqueado',()=>assert.throws(()=>calculatePlanarPolygon(parsePlanarPoints('0,0\n1,1\n2,2')),/degenerado/));
+test('URL de catálogo valida y rechaza contraseñas/enlaces no seguros',()=>{assert.equal(safeCatalogUrl('https://gestion360.jfconnect.online/admin/'),'https://gestion360.jfconnect.online/admin/');for(const u of ['pendiente','http://test.com','https://u:p@test.com','javascript:alert(1)','https://a.test/p?token=x'])assert.equal(safeCatalogUrl(u),null);});
