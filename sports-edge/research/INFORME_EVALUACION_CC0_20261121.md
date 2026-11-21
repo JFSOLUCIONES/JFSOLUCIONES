@@ -39,3 +39,19 @@ No afirmar que el 55,78 % sea probabilidad de ganar una apuesta ni ROI. Exactitu
 7. No activar recomendaciones en producción ni descontar créditos por informes predictivos hasta aprobar estos controles.
 
 **Publicación:** solo informe estadístico agregado y documentación reproducible; sin datos de clientes, tokens ni datasets externos.
+
+
+## Auditoría de cobertura del holdout (21/11/2026)
+
+Inspección de `football-json/2025-26/de.1.json` realizada en VPS1 y reportada por la ejecución del usuario:
+
+- `PARTIDOS_ARCHIVO=306`
+- `MARCADORES_COMPLETOS=294`
+- `SIN_MARCADOR_FINAL=12`
+- `PARTIDOS_EVALUADOS_MODELO=294`
+
+**Resultado:** El holdout de 294 coincide exactamente con los 294 registros que incluyen `score.ft` como lista de dos enteros. Cobertura de marcadores completos: **96,08 %**. No hay evidencia de doce registros adicionales omitidos por el evaluador, pero tampoco se ha comprobado todavía cuáles son los doce encuentros sin marcador ni su resultado real.
+
+**Precaución:** La muestra puede estar sesgada por ausencia de resultados. No reemplazar las doce observaciones con marcadores inventados o derivados de la salida del modelo. Auditoría pendiente: enumerar ID/fecha/equipos/jornada de los faltantes, identificar el motivo y verificar con otra fuente con derechos adecuados; después volver a evaluar con el mismo protocolo y sin usar datos futuros.
+
+Esta observación se basa en el resultado de terminal aportado por el operador; no se ha descargado el archivo completo al repositorio de GitHub.
