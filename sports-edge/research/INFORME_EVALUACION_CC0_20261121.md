@@ -64,3 +64,26 @@ Esta observación se basa en el resultado de terminal aportado por el operador; 
 El lector original `learn_offline.py` solo leía `match["score"]["ft"]`, por lo que descartó sistemáticamente 12 empates 0–0 en el holdout. Este sesgo de selección puede afectar a exactitud, Brier, log-loss y calibración. **Retirar de cualquier presentación comercial la exactitud 55,78 %, el ECE 8,13 % y la conclusión de mejora hasta recalcular.** No asumir que los datos faltan en el proveedor ni completar con valores imaginarios.
 
 Reparación propuesta: aceptar las listas `[0,0]` para temporadas históricas ya finalizadas, mantener exclusión de encuentros futuros o no verificados en la temporada corriente, recalcular train/calibrate/test sin fugas y documentar cambios. Los números corregidos están **pendientes de ejecución** en VPS1.
+
+
+## EVALUACIÓN CORREGIDA FINAL — 306 partidos (21/11/2026)
+
+El operador ejecutó en VPS1 el script de corrección `JF_SPORTS_EDGE_CC0_FIX_00_V02.sh`; la salida aportada confirma ocho tests aprobados, 12 empates 0–0 recuperados y `ESTUDIO_HISTORICO_CORREGIDO_OK`.
+
+**Estas cifras SUSTITUYEN las del holdout previo de 294 partidos**, que omitía sistemáticamente empates 0–0 debido a la representación `"score":[0,0]`.
+
+| Métrica | Modelo JF, 306 | Referencia, 306 |
+|---|---:|---:|
+| Precisión 1X2 | **0.53595 (53,595%)** | 0.43791 (43,791%) |
+| Log-loss | **0.99757** | 1.07083 |
+| Brier score | **0.59344** | 0.64797 |
+| ECE top-class | 0.07593 (7,593%) | **0.00944 (0,944%)** |
+
+- Partidos históricos reconocidos: 4.929; conjunto de calibración 2024/25: 306; holdout 2025/26: 306.
+- Temperatura ajustada solamente en temporada de calibración: 1.2.
+- Estado: `RESEARCH_ONLY_NOT_PRODUCTION_CALIBRATED`. **No se validaron cuotas, mercados goles/ambos anotan, combinadas, ausencias o rentabilidad.**
+- Fuente y licencia: `openfootball/football.json` CC0-1.0.
+- El informe detallado se guardó en el VPS en `/root/jf-sports-edge-research/cc0/reporte_entrenamiento_bundesliga_corregido.json`; no forma parte de este repo público.
+- Próximas pruebas: revisión de las entradas 0–0 en entrenamiento, bootstrap por jornada, walk-forward en temporadas adicionales, métricas por clase y calibración multicategoría.
+
+*Las cifras previas de 55,78% sobre 294 quedan anuladas para cualquier comparación comercial o de producto.*
