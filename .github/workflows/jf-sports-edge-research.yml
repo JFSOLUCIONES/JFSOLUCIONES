@@ -1,6 +1,10 @@
 name: JF SPORTS EDGE QA historico CC0
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'sports-edge/v060-research/**'
+      - '.github/workflows/jf-sports-edge-research.yml'
   push:
     paths:
       - 'sports-edge/v060-research/**'
