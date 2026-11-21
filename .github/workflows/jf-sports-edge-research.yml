@@ -1,0 +1,55 @@
+name: JF SPORTS EDGE QA historico CC0
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'sports-edge/v060-research/**'
+      - '.github/workflows/jf-sports-edge-research.yml'
+  schedule:
+    - cron: '32 11 * * 1'
+permissions:
+  contents: read
+concurrency:
+  group: jf-edge-research-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run pure Python tests
+        run: |
+          PYTHONPATH=sports-edge/v060-research/src python -m unittest discover -s sports-edge/v060-research/tests -v
+  historical-holdout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch public-domain history
+        run: git clone --depth 1 https://github.com/openfootball/football.json.git /tmp/football-json
+      - name: Evaluate fixed holdout (no secrets)
+        run: |
+          python sports-edge/v060-research/src/jf_edge/learn_offline.py --data-dir /tmp/football-json --league de.1 --before 2026-11-21 --cal-season 2024-25 --test-season 2025-26 --output jf-edge-holdout-report.json
+      - name: Assert complete 306 matches and research-only state
+        run: |
+          python - <<'PY'
+          import json
+          r=json.load(open('jf-edge-holdout-report.json',encoding='utf-8'))
+          assert r['holdout_matches']==306
+          assert r['calibration_matches']==306
+          assert r['status']=='RESEARCH_ONLY_NOT_PRODUCTION_CALIBRATED'
+          print('JF_EDGE_HOLDOUT_306_AUDITED')
+          PY
+      - name: Store anonymous metrics for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: jf-edge-2025-26-holdout
+          path: jf-edge-holdout-report.json
+          retention-days: 30
