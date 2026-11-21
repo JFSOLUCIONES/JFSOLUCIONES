@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.venv/
+data/
+*.sqlite3
+*.db
+.env
+*.pem
+*.key
+*.age
+*.p12
