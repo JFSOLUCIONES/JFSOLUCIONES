@@ -1,0 +1,31 @@
+name: JF SPORTS EDGE v062 Scout source QA
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "sports-edge/v062-research/**"
+      - ".github/workflows/jf-sports-edge-v062-scout.yml"
+  pull_request:
+    paths:
+      - "sports-edge/v062-research/**"
+      - ".github/workflows/jf-sports-edge-v062-scout.yml"
+permissions:
+  contents: read
+jobs:
+  no-secrets-unit-qa:
+    name: Cross-provider identity and scout tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run 19 offline tests
+        env:
+          PYTHONPATH: sports-edge/v062-research/src
+        run: |
+          python -m unittest discover -s sports-edge/v062-research/tests -v
+      - name: Compile source
+        run: |
+          python -m py_compile sports-edge/v062-research/src/jf_edge/identity.py sports-edge/v062-research/src/jf_edge/scout_evidence.py
