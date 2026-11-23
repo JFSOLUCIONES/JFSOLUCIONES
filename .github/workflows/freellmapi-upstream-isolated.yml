@@ -1,0 +1,393 @@
+name: JF LAB - FreeLLMAPI upstream isolated smoke
+
+on:
+  pull_request:
+    paths:
+      - "src/labs/freellmapi-contract.js"
+      - "test/freellmapi*.test.js"
+      - "docs/LAB_FREELLMAPI*.md"
+      - ".github/workflows/freellmapi-upstream-isolated.yml"
+
+# Superseded commits should not consume runner capacity or generate duplicate artifacts.
+concurrency:
+  group: jf-freellmapi-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# No GitHub token permissions, no repository secrets, no deployments.
+permissions: {}
+
+jobs:
+  upstream-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      # Exact publicly reviewed upstream commit. No floating main/latest.
+      UPSTREAM_SHA: "43b92cdfedd2c85b17f666080bab5b6c8707a0fa"
+    steps:
+      - name: Prepare Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Fetch immutable upstream source without credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init freellmapi-upstream
+          git -C freellmapi-upstream remote add origin https://github.com/tashfeenahmed/freellmapi.git
+          git -C freellmapi-upstream -c protocol.version=2 fetch --depth 1 origin "$UPSTREAM_SHA"
+          git -C freellmapi-upstream checkout --detach "$UPSTREAM_SHA"
+          test "$(git -C freellmapi-upstream rev-parse HEAD)" = "$UPSTREAM_SHA"
+          echo "Upstream source pinned to exact reviewed commit."
+
+      - name: Install upstream dependencies and compile (ephemeral runner)
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm ci --no-fund --no-audit
+          npm run build
+
+      - name: Boot real upstream service and check loopback and unauthorized API
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          umask 077
+          export NODE_ENV=production
+          export HOST=127.0.0.1
+          export PORT=3001
+          export ALLOWED_HOSTS=127.0.0.1,localhost
+          export ENCRYPTION_KEY="$(openssl rand -hex 32)"
+          export FREEAPI_DB_PATH="$RUNNER_TEMP/jf-freellmapi-smoke.sqlite"
+          node server/dist/index.js > "$RUNNER_TEMP/jf-freellmapi-smoke.log" 2>&1 &
+          server_pid=$!
+          cleanup() {
+            kill "$server_pid" 2>/dev/null || true
+            wait "$server_pid" 2>/dev/null || true
+            rm -f "$RUNNER_TEMP/jf-freellmapi-smoke.log" "$RUNNER_TEMP"/jf-freellmapi-smoke.sqlite*
+          }
+          trap cleanup EXIT
+
+          ready=0
+          for attempt in $(seq 1 55); do
+            if curl --silent --fail --max-time 2 http://127.0.0.1:3001/api/ping > /dev/null; then
+              ready=1
+              break
+            fi
+            if ! kill -0 "$server_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then
+            echo "::error::Upstream service failed to become ready; logs withheld because setup tokens may be present."
+            exit 1
+          fi
+
+          node --input-type=module <<'NODE'
+          const base = "http://127.0.0.1:3001";
+          const ping = await fetch(base + "/api/ping", { redirect: "error" });
+          if (!ping.ok || (await ping.json()).status !== "ok") throw new Error("PING_FAILED");
+          const unauth = await fetch(base + "/v1/chat/completions", {
+            method: "POST",
+            redirect: "error",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              model: "auto",
+              messages: [{ role: "user", content: "PRUEBA_JF_OK" }],
+              stream: false,
+            }),
+          });
+          if (unauth.status !== 401) throw new Error("UNAUTH_CHAT_NOT_BLOCKED:" + unauth.status);
+          const wrongKey = await fetch(base + "/v1/chat/completions", {
+            method: "POST",
+            redirect: "error",
+            headers: {
+              Authorization: "Bearer DELIBERATELY_INVALID_TEST_TOKEN",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "auto",
+              messages: [{ role: "user", content: "PRUEBA_JF_OK" }],
+              stream: false,
+            }),
+          });
+          if (wrongKey.status !== 401) throw new Error("BAD_KEY_NOT_BLOCKED:" + wrongKey.status);
+          console.log("REAL_UPSTREAM_BOOT_OK; PING_OK; UNAUTH_401; INVALID_KEY_401.");
+          console.log("No provider configured and no real inference attempted.");
+          NODE
+
+      - name: Audit upstream production dependency advisories
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev --json > "$RUNNER_TEMP/jf-freellmapi-audit.json" || true
+          node - "$RUNNER_TEMP/jf-freellmapi-audit.json" <<'NODE'
+          const fs = require("node:fs");
+          const f = process.argv[2];
+          const parsed = JSON.parse(fs.readFileSync(f, "utf8"));
+          const v = parsed.metadata?.vulnerabilities;
+          if (!v) throw new Error("UPSTREAM_AUDIT_UNAVAILABLE");
+          console.log("Upstream production advisories:", JSON.stringify({
+            critical: v.critical || 0, high: v.high || 0,
+            moderate: v.moderate || 0, low: v.low || 0,
+          }));
+          const issues = Object.entries(parsed.vulnerabilities || {}).map(([name, info]) => ({
+            name,
+            severity: info.severity,
+            direct: Boolean(info.isDirect),
+            affectedRange: String(info.range || ''),
+            fix: info.fixAvailable === false ? "none" :
+              info.fixAvailable === true ? "available" :
+              info.fixAvailable?.version ? info.fixAvailable.version : "unknown",
+          }));
+          for (const info of issues.sort((a, b) => a.name.localeCompare(b.name))) {
+            console.log("Upstream advisory package:", JSON.stringify(info));
+          }
+          if ((v.critical || 0) > 0 || (v.high || 0) > 0) {
+            // Baseline is intentionally insecure. It is evidence, NOT the
+            // deploy gate: the independent remediation-preview job enforces
+            // the high/critical policy on the patched candidate.
+            console.log("UNPATCHED_UPSTREAM_REJECTED_FOR_DEPLOYMENT");
+          }
+          NODE
+          rm -f "$RUNNER_TEMP/jf-freellmapi-audit.json"
+
+  remediation-preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      UPSTREAM_SHA: "43b92cdfedd2c85b17f666080bab5b6c8707a0fa"
+    steps:
+      - name: Node.js 22 for independent lockfile-only remediation
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Fetch reviewed upstream commit in ephemeral runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init freellmapi-upstream
+          git -C freellmapi-upstream remote add origin https://github.com/tashfeenahmed/freellmapi.git
+          git -C freellmapi-upstream -c protocol.version=2 fetch --depth 1 origin "$UPSTREAM_SHA"
+          git -C freellmapi-upstream checkout --detach "$UPSTREAM_SHA"
+          test "$(git -C freellmapi-upstream rev-parse HEAD)" = "$UPSTREAM_SHA"
+
+      - name: Baseline production vulnerabilities (never printed raw)
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev --json > "$RUNNER_TEMP/audit-before.json" || true
+          node - "$RUNNER_TEMP/audit-before.json" <<'NODE'
+          const fs = require('node:fs');
+          const a = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          if (!a.metadata?.vulnerabilities) throw new Error('BASELINE_AUDIT_UNAVAILABLE');
+          const v = a.metadata.vulnerabilities;
+          console.log('BASELINE:', JSON.stringify({
+            critical:v.critical||0,high:v.high||0,moderate:v.moderate||0,low:v.low||0
+          }));
+          NODE
+
+      - name: Attempt safe lockfile remediation without --force
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          # Preview only: never commit fixes into our repo or the upstream repo.
+          # npm audit fix can return nonzero when some advisories remain.
+          set +e
+          npm audit fix --package-lock-only --ignore-scripts --no-fund > "$RUNNER_TEMP/jf-audit-fix-output.log" 2>&1
+          fix_rc=$?
+          set -e
+          echo "NON_FORCE_LOCKFILE_FIX_EXIT=$fix_rc"
+          echo "Modified manifest/lock files:"
+          git diff --name-only -- package.json package-lock.json server/package.json client/package.json cli/package.json shared/package.json
+          # No --force, no code changes, and no remote pushes.
+          if git diff --quiet -- package-lock.json; then
+            echo "LOCKFILE_UNCHANGED"
+          else
+            echo "LOCKFILE_CHANGED_IN_EPHEMERAL_RUNNER_ONLY"
+          fi
+          rm -f "$RUNNER_TEMP/jf-audit-fix-output.log"
+
+      - name: Audit remediated lockfile and expose bounded details
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev --json > "$RUNNER_TEMP/audit-after.json" || true
+          node - "$RUNNER_TEMP/audit-before.json" "$RUNNER_TEMP/audit-after.json" <<'NODE'
+          const fs = require('node:fs');
+          const before = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const after = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+          if (!after.metadata?.vulnerabilities) throw new Error('POST_FIX_AUDIT_UNAVAILABLE');
+          const counts = (x) => ({
+            critical:x.critical||0, high:x.high||0,
+            moderate:x.moderate||0, low:x.low||0
+          });
+          console.log('SCA_BEFORE:',JSON.stringify(counts(before.metadata.vulnerabilities)));
+          console.log('SCA_AFTER:',JSON.stringify(counts(after.metadata.vulnerabilities)));
+          const findings = Object.entries(after.vulnerabilities||{})
+            .filter(([,v]) => ['high','critical'].includes(v.severity))
+            .map(([name,v]) => ({
+              package:name, severity:v.severity,
+              direct:Boolean(v.isDirect), fixAvailable:v.fixAvailable===false?'none':'yes_or_conditional'
+            }));
+          console.log('SCA_REMAINING_HIGH_OR_CRITICAL:',JSON.stringify(findings));
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/jf-remediation-gate.json',
+            JSON.stringify({counts:counts(after.metadata.vulnerabilities),findings}));
+          NODE
+
+      - name: Apply targeted Undici 6.29.1 patch in temporary copy
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          # Fixed version per GHSA-xjj6-f33q-929c; stays within Undici 6.x.
+          npm install --workspace @freellmapi/server --save-exact --package-lock-only --ignore-scripts --no-fund --no-audit undici@6.29.1
+          node -e 'const x=require("./server/package.json");if(x.dependencies?.undici!=="6.29.1")process.exit(1);console.log("UNDICI_DIRECT_PIN=6.29.1")'
+          npm audit --omit=dev --json > "$RUNNER_TEMP/audit-patched.json" || true
+          node - "$RUNNER_TEMP/audit-patched.json" <<'NODE'
+          const fs = require('node:fs');
+          const audit = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const v = audit.metadata?.vulnerabilities;
+          if(!v) throw new Error("PATCHED_AUDIT_UNAVAILABLE");
+          const counts={
+            critical:v.critical||0,high:v.high||0,
+            moderate:v.moderate||0,low:v.low||0
+          };
+          console.log("SCA_AFTER_UNDICI_6_29_1:",JSON.stringify(counts));
+          console.log("REMAINING_HIGH_PACKAGES:",JSON.stringify(
+            Object.entries(audit.vulnerabilities||{})
+              .filter(([,x])=>x.severity==='high'||x.severity==='critical')
+              .map(([name,x])=>({package:name,severity:x.severity}))
+          ));
+          console.log("REMAINING_MODERATE_PACKAGES:",JSON.stringify(
+            Object.entries(audit.vulnerabilities||{})
+              .filter(([,x])=>x.severity==='moderate')
+              .map(([name,x])=>({
+                package:name, direct:Boolean(x.isDirect),
+                affectedRange:String(x.range||""),
+                fixAvailable:x.fixAvailable===false?"no":"yes_or_conditional"
+              }))
+          ));
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/jf-remediation-gate.json',
+            JSON.stringify({counts}));
+          NODE
+
+      - name: Reclassify shadcn generator as dev-only dependency (experiment)
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          # The client build runs via vite/tsc, not the shadcn generator.
+          # This is dependency SCOPING, not a vulnerability fix: dev packages
+          # remain vulnerable until upstream patches them.
+          npm pkg delete dependencies.shadcn --workspace @freellmapi/client
+          npm pkg set 'devDependencies.shadcn=^4.2.0' --workspace @freellmapi/client
+          npm install --package-lock-only --ignore-scripts --no-fund --no-audit
+          node <<'NODE'
+          const j=require("./client/package.json");
+          if (j.dependencies?.shadcn || j.devDependencies?.shadcn !== "^4.2.0")
+            throw new Error("SHADCN_SCOPE_NOT_APPLIED");
+          if (JSON.stringify(j.scripts||{}).includes("shadcn"))
+            throw new Error("SHADCN_USED_BY_CLIENT_BUILD");
+          console.log("SHADCN_DEV_ONLY_SCOPE_CONFIRMED");
+          NODE
+          npm audit --omit=dev --json > "$RUNNER_TEMP/jf-audit-runtime-scope.json" || true
+          npm audit --json > "$RUNNER_TEMP/jf-audit-all-dependencies.json" || true
+          node - "$RUNNER_TEMP/jf-audit-runtime-scope.json" "$RUNNER_TEMP/jf-audit-all-dependencies.json" <<'NODE'
+          const fs=require('node:fs');
+          function read(p){
+            const x=JSON.parse(fs.readFileSync(p,'utf8'));
+            if(!x.metadata?.vulnerabilities)throw new Error("AUDIT_METADATA_UNAVAILABLE");
+            const v=x.metadata.vulnerabilities;
+            return {counts:{
+              critical:v.critical||0,high:v.high||0,
+              moderate:v.moderate||0,low:v.low||0
+            },remaining:Object.entries(x.vulnerabilities||{})
+              .filter(([,p])=>['critical','high','moderate'].includes(p.severity))
+              .map(([name,p])=>({package:name,severity:p.severity}))};
+          }
+          const runtime=read(process.argv[2]);
+          const all=read(process.argv[3]);
+          console.log("SCA_RUNTIME_AFTER_DEV_SCOPE:", JSON.stringify(runtime));
+          console.log("SCA_ALL_INCLUDING_DEV:", JSON.stringify(all.counts));
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/jf-remediation-gate.json',
+            JSON.stringify({counts:runtime.counts,developerAudit:all.counts}));
+          NODE
+          rm -f "$RUNNER_TEMP/jf-audit-runtime-scope.json" "$RUNNER_TEMP/jf-audit-all-dependencies.json"
+
+      - name: Reinstall updated lockfile and run compile, migration tests and lint
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm ci --no-fund --no-audit
+          npm run build
+          npm run test:migrations
+          npm run lint
+
+      - name: Reproduce originally timed-out test under standard 5s limit
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm run test -w server -- src/__tests__/routes/proxy-array-content.test.ts
+
+      - name: Run full upstream test suites on patched dependencies
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          # 15s only for the CI full-suite Vitest runner under noisy shared CI
+          # infrastructure; the isolated regression test above keeps its
+          # original 5s limit. This is not a latency benchmark.
+          npm run test:bootstrap
+          npm run test:hooks
+          npm run test -w server -- --testTimeout 15000
+          npm run test -w cli
+          npm run test -w client --if-present
+
+      - name: Preserve reproducible upstream dependency patch
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/jf-freellmapi-remediation"
+          mkdir -p "$dir"
+          git diff --binary -- package.json package-lock.json server/package.json client/package.json cli/package.json shared/package.json > "$dir/verified-dependency-change.patch"
+          test -s "$dir/verified-dependency-change.patch"
+          cp package-lock.json "$dir/package-lock.patched.json"
+          cp server/package.json "$dir/server-package.patched.json"
+          cp "$RUNNER_TEMP/jf-remediation-gate.json" "$dir/security-gate.json"
+          printf 'upstream_commit=%s\n' "$UPSTREAM_SHA" > "$dir/metadata.txt"
+          printf 'node_major=22\nscope=ephemeral_build_only\nproduction_approved=false\n' >> "$dir/metadata.txt"
+          ( cd "$dir" && sha256sum verified-dependency-change.patch package-lock.patched.json server-package.patched.json security-gate.json > SHA256SUMS )
+          echo "Remediation patch archived for review (no provider credentials)."
+
+      - name: Upload reproducible dependency remediation bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: jf-freellmapi-dependency-patch
+          path: ${{ runner.temp }}/jf-freellmapi-remediation/
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Gate - block unless security checks are clear
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          node - "$RUNNER_TEMP/jf-remediation-gate.json" <<'NODE'
+          const fs=require('node:fs');
+          const {counts}=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          if(counts.critical>0 || counts.high>0){
+            console.error('BLOCKED_SECURITY_GATE: remaining high/critical production advisories');
+            process.exit(1);
+          }
+          console.log('PRODUCTION_DEPENDENCY_AUDIT_GATE_PASS_WITH_NON_FORCE_LOCKFILE_PREVIEW');
+          console.log('This does NOT approve multi-tenant or commercial deployment.');
+          NODE
