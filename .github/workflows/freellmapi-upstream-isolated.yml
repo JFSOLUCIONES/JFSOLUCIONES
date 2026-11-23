@@ -127,6 +127,18 @@ jobs:
             critical: v.critical || 0, high: v.high || 0,
             moderate: v.moderate || 0, low: v.low || 0,
           }));
+          const issues = Object.entries(parsed.vulnerabilities || {}).map(([name, info]) => ({
+            name,
+            severity: info.severity,
+            direct: Boolean(info.isDirect),
+            affectedRange: String(info.range || ''),
+            fix: info.fixAvailable === false ? "none" :
+              info.fixAvailable === true ? "available" :
+              info.fixAvailable?.version ? info.fixAvailable.version : "unknown",
+          }));
+          for (const info of issues.sort((a, b) => a.name.localeCompare(b.name))) {
+            console.log("Upstream advisory package:", JSON.stringify(info));
+          }
           if ((v.critical || 0) > 0 || (v.high || 0) > 0) {
             throw new Error("UPSTREAM_HIGH_OR_CRITICAL_ADVISORIES");
           }
