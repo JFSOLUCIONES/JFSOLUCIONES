@@ -28,7 +28,7 @@ El flujo incorpora:
 4. **Suite completa upstream** con las dependencias ensayadas.
 5. Gate final: solo `success` para el job de remediación si no hay alertas altas/críticas **y** pasan las pruebas.
 
-**Nota:** la ejecución de la suite completa todavía estaba en curso cuando se redactó esta evidencia. No declarar que el parche está aprobado sin confirmar el resultado final en GitHub Actions.
+**Resultado verificado:** en la ejecución 45266812778, el job `remediation-preview` terminó con **success**. La auditoría después de actualizar `undici@6.29.1` reportó **0 críticas, 0 altas, 4 moderadas**. `npm ci`, compilación, migraciones, lint y la suite completa `npm test` terminaron con éxito. El job separado `upstream-smoke` sigue en **failure de forma esperada**, porque audita el lockfile **original** con 13 alertas altas: este fallo mide el riesgo de la versión sin parche. No confundir el parche temporal validado con una release upstream corregida o con autorización de desplegar.
 
 ## Seguridad operacional
 
@@ -39,4 +39,4 @@ El flujo incorpora:
 
 ## Resultado de decisión hasta ahora
 
-La remediación **redujo 12 de 13** alertas altas mediante actualizaciones semver compatibles. El bloqueo restante tiene una propuesta puntual de parche y pruebas de compatibilidad en ejecución. No publicar hasta confirmar resultados y pasar una revisión técnica independiente.
+La remediación **redujo 13 de 13 alertas altas** dentro del runner temporal y superó la suite completa, con **4 moderadas pendientes**. No publicar ni usar comercialmente hasta conservar el lockfile, revisar las moderadas, verificar imágenes y red, y realizar pruebas por tenant y proveedor con autorización.
