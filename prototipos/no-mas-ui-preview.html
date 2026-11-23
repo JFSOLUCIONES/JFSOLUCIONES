@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Prototipo visual accesible y adaptable del portal NO+; no contiene noticias publicadas.">
+<title>NO+ | Concepto editorial de alto impacto — JF SOLUCIONES</title>
+<style>
+:root{--bg:#0b0c0e;--surface:#141619;--raised:#1c1f23;--line:#383b40;--text:#f7f5f2;--sub:#b8b8ba;--red:#ed2939;--red2:#a90f21;--cream:#eee9dc;--radius:14px;--focus:#ffd766;--sans:system-ui,-apple-system,"Segoe UI",sans-serif;--serif:Georgia,"Times New Roman",serif}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.5}
+a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+button{font:inherit}.wrap{width:min(1240px,calc(100% - 48px));margin-inline:auto}
+.skip{position:absolute;left:10px;top:-60px;background:var(--focus);color:#121212;padding:12px 18px;z-index:20}.skip:focus{top:10px}
+.preview{background:#f3d9a5;color:#191612;text-align:center;padding:8px 16px;font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.top{border-bottom:1px solid var(--line);background:#09090b}
+.top-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:82px}
+.wordmark{display:flex;align-items:center;gap:16px;text-decoration:none}
+.wordmark strong{font:900 clamp(2.2rem,5vw,3.7rem)/1 var(--sans);letter-spacing:-.09em}
+.wordmark strong em{font-style:normal;color:var(--red);letter-spacing:-.02em}
+.wordmark small{display:block;color:var(--sub);font-size:.68rem;max-width:185px;line-height:1.4;text-transform:uppercase;letter-spacing:.14em;border-left:1px solid var(--line);padding-left:15px}
+.nav{display:flex;align-items:center;gap:24px}.nav a{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--sub)}
+.nav a:hover,.nav a[aria-current="page"]{color:white}
+.nav .nav-feature{padding:12px 17px;background:var(--red);color:white;border-radius:4px}.nav-feature:hover{background:#c20f25}
+.menu-toggle{display:none;border:1px solid var(--line);background:transparent;color:white;padding:9px 14px;border-radius:4px;cursor:pointer}
+.section-eyebrow{color:var(--red);text-transform:uppercase;letter-spacing:.2em;font-size:.76rem;font-weight:800}
+.strap{border-bottom:1px solid var(--line);padding:16px 0;color:var(--sub);display:flex;gap:22px;justify-content:space-between;font-size:.79rem;text-transform:uppercase;letter-spacing:.08em}
+.strap strong{color:white}.strap .status{color:#f4c271}
+.hero{padding:64px 0 62px;display:grid;grid-template-columns:minmax(0,1.09fr) minmax(0,.91fr);gap:38px;align-items:stretch}
+.hero-copy{display:flex;flex-direction:column;justify-content:center}
+.hero h1{font:800 clamp(3.4rem,7.5vw,7.3rem)/.96 var(--serif);letter-spacing:-.065em;margin:20px 0 28px;max-width:760px}
+.hero h1 span{color:var(--red)}
+.hero .lead{font-size:clamp(1.07rem,1.8vw,1.32rem);color:#d7d4cf;max-width:530px;line-height:1.6;margin:0 0 30px}
+.actions{display:flex;flex-wrap:wrap;gap:14px}.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-size:.86rem;padding:15px 20px;border-radius:4px;border:1px solid #6c6e73}
+.btn.primary{background:var(--red);border-color:var(--red)}.btn:hover{transform:translateY(-2px)}
+.hero-art{position:relative;min-height:440px;border:1px solid #484147;border-radius:var(--radius);overflow:hidden;background:radial-gradient(circle at 72% 28%,#9b1426 0%,transparent 37%),radial-gradient(circle at 12% 88%,#56141f 0%,transparent 48%),linear-gradient(130deg,#292024,#0e1014 65%)}
+.hero-art::before{content:"";position:absolute;inset:-15%;opacity:.25;background:repeating-linear-gradient(0deg,transparent 0 25px,#fff 26px,transparent 27px);transform:rotate(-18deg)}
+.hero-art::after{content:"NO+";font:900 clamp(7rem,21vw,19rem)/1 var(--sans);letter-spacing:-.14em;position:absolute;inset:auto 6% 21%;color:#ffffff10;transform:rotate(-12deg)}
+.art-label{position:absolute;z-index:1;top:20px;left:20px;border:1px solid #ffffff5c;background:#09090972;padding:9px 13px;font-size:.67rem;letter-spacing:.15em;text-transform:uppercase}
+.art-main{position:absolute;z-index:1;inset:auto 26px 30px;display:grid;gap:10px;max-width:330px}
+.art-main .kicker{background:var(--red);padding:5px 9px;font-weight:800;width:max-content;text-transform:uppercase;letter-spacing:.12em;font-size:.71rem}
+.art-main strong{font:800 clamp(2rem,3.4vw,3.2rem)/1.05 var(--serif);max-width:330px}
+.art-main small{color:#e6d9db;max-width:280px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);margin-bottom:65px}
+.metrics div{padding:27px 23px;border-right:1px solid var(--line)}.metrics div:first-child{padding-left:0}.metrics div:last-child{border-right:0}
+.metrics strong{display:block;font:800 clamp(1.2rem,2vw,1.7rem) var(--serif);margin-bottom:3px}
+.metrics span{display:block;font-size:.78rem;color:var(--sub);text-transform:uppercase;letter-spacing:.09em}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:25px}
+.section-head h2{font:800 clamp(2rem,4vw,3.3rem)/1.05 var(--serif);letter-spacing:-.04em;margin:6px 0 0}
+.section-head p{color:var(--sub);font-size:.88rem;max-width:320px;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-bottom:78px}
+.card{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.card .visual{height:212px;display:flex;align-items:end;padding:18px;position:relative;isolation:isolate}
+.card:nth-child(1) .visual{background:linear-gradient(135deg,#52151f,#1b1b23 72%)}
+.card:nth-child(2) .visual{background:linear-gradient(135deg,#56432f,#191b20 72%)}
+.card:nth-child(3) .visual{background:linear-gradient(135deg,#1d3441,#191b20 72%)}
+.card .visual:before{content:"";position:absolute;z-index:-1;width:180px;height:180px;border:26px solid #ffffff12;border-radius:50%;top:0;right:-32px}
+.card .visual span{font:800 2.3rem/1 var(--serif);letter-spacing:-.05em}
+.card .body{padding:23px}.card .category{font-size:.69rem;text-transform:uppercase;letter-spacing:.15em;color:#ff8995;font-weight:900}
+.card h3{font:800 1.6rem/1.14 var(--serif);margin:11px 0}
+.card p{color:var(--sub);font-size:.9rem;margin:0 0 18px}
+.card .flag{border-top:1px solid var(--line);padding-top:14px;color:#e2dcda;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.mission{background:var(--cream);color:#181a1d;padding:56px 0}
+.mission-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.mission h2{font:800 clamp(2.5rem,5.5vw,5rem)/1.03 var(--serif);letter-spacing:-.065em;margin:12px 0 20px}
+.mission p{max-width:620px;font-size:1.09rem;line-height:1.6}
+.checks{list-style:none;padding:0;margin:0}.checks li{border-bottom:1px solid #bcb7ae;display:flex;gap:14px;align-items:center;padding:17px 0;font-weight:800}
+.checks li:before{content:"✓";display:inline-grid;place-items:center;width:28px;height:28px;background:#171717;color:white;border-radius:50%;flex:none}
+.bottom{padding:50px 0;display:flex;justify-content:space-between;gap:20px;color:var(--sub);font-size:.82rem}
+.bottom strong{font:900 2.4rem/1 var(--sans);letter-spacing:-.08em;color:white}.bottom strong span{color:var(--red)}
+.bottom p{max-width:400px}.bottom a{color:white}
+@media(max-width:960px){.hero{grid-template-columns:1fr;gap:28px;padding-top:45px}.hero-art{min-height:355px}.hero h1{max-width:850px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cards .card:last-child{grid-column:span 2}.mission-grid{gap:30px}}
+@media(max-width:700px){.wrap{width:min(100% - 32px,540px)}.top-inner{min-height:70px}.wordmark small{font-size:.59rem;max-width:125px}.menu-toggle{display:block}.nav{display:none;position:absolute;z-index:5;top:111px;left:0;right:0;padding:20px 16px;background:#0d0f13;border-bottom:1px solid var(--line);box-shadow:0 20px 25px #0009;flex-direction:column;align-items:stretch;gap:18px}.nav.open{display:flex}.nav a{padding:7px}.nav .nav-feature{text-align:center}.strap{font-size:.65rem;flex-direction:column;gap:4px}.hero{padding:42px 0}.hero h1{font-size:clamp(3.3rem,12vw,5.6rem)}.hero-art{min-height:330px}.metrics{grid-template-columns:1fr;margin-bottom:50px}.metrics div,.metrics div:first-child{padding:16px 0;border-right:0;border-bottom:1px solid var(--line)}.metrics div:last-child{border-bottom:0}.section-head{display:block}.section-head p{margin-top:14px}.cards{grid-template-columns:1fr;gap:16px;margin-bottom:55px}.cards .card:last-child{grid-column:auto}.mission{padding:46px 0}.mission-grid{grid-template-columns:1fr;gap:12px}.bottom{flex-direction:column}.hero .lead{font-size:1.06rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido principal</a>
+<div class="preview" role="note">Vista de concepto · No es el portal publicado · Sin noticias reales</div>
+<header class="top">
+<div class="wrap top-inner">
+<a class="wordmark" href="#inicio" aria-label="NO+ volver al inicio"><strong>NO<em>+</em></strong><small>Periodismo independiente · Diseño experimental</small></a>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="menu" aria-expanded="false">☰ Menú</button>
+<nav id="menu" class="nav" aria-label="Navegación principal">
+<a href="#inicio" aria-current="page">Portada</a><a href="#secciones">Secciones</a><a href="#principios">Principios</a><a class="nav-feature" href="#principios">Conoce NO+</a>
+</nav></div>
+</header>
+<main id="contenido">
+<div class="wrap" id="inicio">
+<div class="strap"><span><strong>NO+ / Laboratorio visual</strong> · Versión propuesta</span><span class="status">Contenido editorial ilustrativo</span></div>
+<section class="hero" aria-labelledby="portada-titulo">
+<div class="hero-copy">
+<div class="section-eyebrow">Identidad editorial · Lambayeque y Perú</div>
+<h1 id="portada-titulo">Noticias con <span>criterio.</span> Diseño con carácter.</h1>
+<p class="lead">Una nueva experiencia editorial para NO+: lectura clara, navegación intuitiva y jerarquía visual. Esta página es una maqueta y no publica información periodística.</p>
+<div class="actions"><a class="btn primary" href="#secciones">Explorar la propuesta <span aria-hidden="true">↗</span></a><a class="btn" href="#principios">Cómo se verifican contenidos</a></div>
+</div>
+<div class="hero-art" role="img" aria-label="Composición editorial abstracta en rojo y negro; sin fotografía documental">
+<span class="art-label">Arte conceptual · No es fotografía</span>
+<div class="art-main"><span class="kicker">Diseño de portada</span><strong>Más claridad. Más contexto.</strong><small>Espacio reservado para imágenes y titulares auténticos, después de revisión editorial.</small></div>
+</div>
+</section>
+<section class="metrics" aria-label="Objetivos del diseño">
+<div><strong>Legibilidad</strong><span>Tipografía y contraste</span></div>
+<div><strong>Adaptación</strong><span>Computadora, tableta y celular</span></div>
+<div><strong>Control</strong><span>Publicación humana autorizada</span></div>
+</section>
+<section id="secciones" aria-labelledby="secciones-titulo">
+<div class="section-head"><div><span class="section-eyebrow">Arquitectura de contenidos</span><h2 id="secciones-titulo">Secciones de la portada</h2></div><p>Tarjetas de demostración para diseñar la lectura. No representan artículos ni hechos actuales.</p></div>
+<div class="cards">
+<article class="card"><div class="visual" aria-hidden="true"><span>INVESTIGACIÓN</span></div><div class="body"><span class="category">Módulo editorial 01</span><h3>Investigación documentada</h3><p>Espacio preparado para piezas con expedientes, fuentes y verificación antes de publicar.</p><div class="flag">Plantilla sin artículo publicado</div></div></article>
+<article class="card"><div class="visual" aria-hidden="true"><span>REGIÓN</span></div><div class="body"><span class="category">Módulo editorial 02</span><h3>Actualidad regional</h3><p>Portada adaptable para información de Lambayeque con fecha, autor y fuentes.</p><div class="flag">Plantilla sin artículo publicado</div></div></article>
+<article class="card"><div class="visual" aria-hidden="true"><span>PERÚ</span></div><div class="body"><span class="category">Módulo editorial 03</span><h3>Panorama nacional</h3><p>Bloques para análisis, contexto y noticias verificadas, con navegación accesible.</p><div class="flag">Plantilla sin artículo publicado</div></div></article>
+</div>
+</section></div>
+<section class="mission" id="principios" aria-labelledby="principios-titulo"><div class="wrap mission-grid">
+<div><span class="section-eyebrow" style="color:#a70d21">Nuestro estándar</span><h2 id="principios-titulo">Alto impacto. Sin perder rigor.</h2><p>El diseño debe servir al lector, no sustituir la verificación. El sistema propuesto preserva decisiones editoriales humanas, privacidad y seguridad técnica.</p></div>
+<ul class="checks"><li>Fuentes comprobables</li><li>Revisión editorial previa</li><li>Protección de datos personales</li><li>Diseño móvil y accesible</li></ul>
+</div></section>
+</main>
+<footer class="wrap bottom"><div><strong>NO<span>+</span></strong><p>Concepto visual de demostración creado para revisión interna por JF SOLUCIONES. No conectado con el CMS ni con el portal público.</p></div><p>2026 · Laboratorio UX de JF SOLUCIONES<br><a href="#inicio">Volver arriba ↑</a></p></footer>
+<script>
+const toggle=document.getElementById("menu-toggle");
+const nav=document.getElementById("menu");
+function closeMenu(){nav.classList.remove("open");toggle.setAttribute("aria-expanded","false")}
+toggle.addEventListener("click",()=>{const open=toggle.getAttribute("aria-expanded")==="true";toggle.setAttribute("aria-expanded",String(!open));nav.classList.toggle("open",!open)});
+nav.addEventListener("click",event=>{if(event.target.closest("a"))closeMenu()});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&toggle.getAttribute("aria-expanded")==="true"){closeMenu();toggle.focus()}});
+</script>
+</body>
+</html>
