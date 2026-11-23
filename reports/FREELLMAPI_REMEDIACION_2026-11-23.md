@@ -40,3 +40,19 @@ El flujo incorpora:
 ## Resultado de decisión hasta ahora
 
 La remediación **redujo 13 de 13 alertas altas** dentro del runner temporal y superó la suite completa, con **4 moderadas pendientes**. No publicar ni usar comercialmente hasta conservar el lockfile, revisar las moderadas, verificar imágenes y red, y realizar pruebas por tenant y proveedor con autorización.
+
+## Fase 5: auditoría por ámbito de ejecución y CI completo (23/11/2026)
+
+Ejecución GitHub Actions [45273296173](https://github.com/JFSOLUCIONES/JFSOLUCIONES/actions/runs/45273296173), commit `1c75c9d1e6dd9fc3ae0663097bcceef9d4db34ef`:
+
+- Se mantuvo `undici@6.29.1` y la actualización no forzada del lockfile.
+- El paquete `shadcn@^4.2.0`, que aparece como **dependencia de ejecución** en `client/package.json` upstream, fue reclasificado **temporalmente como devDependency** en el runner. La verificación comprobó que el comando de compilación del cliente no invoca `shadcn`.
+- Auditoría de **dependencias clasificadas de producción**: **0 críticas, 0 altas, 0 moderadas, 0 bajas**.
+- Auditoría de **todas las dependencias, incluido desarrollo**: **0 críticas, 0 altas, 4 moderadas, 0 bajas**.
+- Las cuatro advertencias aún presentes en el árbol total afectan `@ts-morph/common`, `minimatch`, `shadcn` y `ts-morph`.
+- Se repitieron pruebas aisladas contra el timeout anterior y el conjunto completo `npm test`: **5.686 pruebas servidor, 183 CLI, 515 cliente aprobadas (6.384), 7 omitidas**; la compilación, migraciones, lint y gate final pasaron.
+- Se preservó nuevo artefacto `jf-freellmapi-dependency-patch` con hashes SHA-256 y lockfile, ID Actions **14866497837**, 154.949 bytes, retención 30 días.
+
+**Interpretación correcta:** la ausencia de avisos en `npm audit --omit=dev` se logró mediante una **reclasificación de ámbito** de `shadcn`, no reparando todas las dependencias. El entorno de desarrollo y la cadena de suministro conservan **4 avisos moderados**; deben evaluarse y remediarse o aislarse antes de cualquier uso de desarrollo conectado a clientes. La clasificación no es una afirmación de seguridad global. El upstream real permanece intacto. No se instaló FreeLLMAPI en VPS1/VPS2, no se conectaron proveedores ni se aprobó integración comercial.
+
+Los pasos del pipeline permanecen versionados en `.github/workflows/freellmapi-upstream-isolated.yml`; el parche se puede regenerar aun después de que caduque el artefacto.
