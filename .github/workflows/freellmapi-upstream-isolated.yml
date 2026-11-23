@@ -277,6 +277,49 @@ jobs:
             JSON.stringify({counts}));
           NODE
 
+      - name: Reclassify shadcn generator as dev-only dependency (experiment)
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          # The client build runs via vite/tsc, not the shadcn generator.
+          # This is dependency SCOPING, not a vulnerability fix: dev packages
+          # remain vulnerable until upstream patches them.
+          npm pkg delete dependencies.shadcn --workspace @freellmapi/client
+          npm pkg set 'devDependencies.shadcn=^4.2.0' --workspace @freellmapi/client
+          npm install --package-lock-only --ignore-scripts --no-fund --no-audit
+          node <<'NODE'
+          const j=require("./client/package.json");
+          if (j.dependencies?.shadcn || j.devDependencies?.shadcn !== "^4.2.0")
+            throw new Error("SHADCN_SCOPE_NOT_APPLIED");
+          if (JSON.stringify(j.scripts||{}).includes("shadcn"))
+            throw new Error("SHADCN_USED_BY_CLIENT_BUILD");
+          console.log("SHADCN_DEV_ONLY_SCOPE_CONFIRMED");
+          NODE
+          npm audit --omit=dev --json > "$RUNNER_TEMP/jf-audit-runtime-scope.json" || true
+          npm audit --json > "$RUNNER_TEMP/jf-audit-all-dependencies.json" || true
+          node - "$RUNNER_TEMP/jf-audit-runtime-scope.json" "$RUNNER_TEMP/jf-audit-all-dependencies.json" <<'NODE'
+          const fs=require('node:fs');
+          function read(p){
+            const x=JSON.parse(fs.readFileSync(p,'utf8'));
+            if(!x.metadata?.vulnerabilities)throw new Error("AUDIT_METADATA_UNAVAILABLE");
+            const v=x.metadata.vulnerabilities;
+            return {counts:{
+              critical:v.critical||0,high:v.high||0,
+              moderate:v.moderate||0,low:v.low||0
+            },remaining:Object.entries(x.vulnerabilities||{})
+              .filter(([,p])=>['critical','high','moderate'].includes(p.severity))
+              .map(([name,p])=>({package:name,severity:p.severity}))};
+          }
+          const runtime=read(process.argv[2]);
+          const all=read(process.argv[3]);
+          console.log("SCA_RUNTIME_AFTER_DEV_SCOPE:", JSON.stringify(runtime));
+          console.log("SCA_ALL_INCLUDING_DEV:", JSON.stringify(all.counts));
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/jf-remediation-gate.json',
+            JSON.stringify({counts:runtime.counts,developerAudit:all.counts}));
+          NODE
+          rm -f "$RUNNER_TEMP/jf-audit-runtime-scope.json" "$RUNNER_TEMP/jf-audit-all-dependencies.json"
+
       - name: Reinstall updated lockfile and run compile, migration tests and lint
         shell: bash
         working-directory: freellmapi-upstream
