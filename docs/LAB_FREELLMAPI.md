@@ -8,7 +8,7 @@ Proyecto externo: https://github.com/tashfeenahmed/freellmapi
 
 Documentación de la API: https://github.com/tashfeenahmed/freellmapi/blob/main/docs/en/api/01-rest-api.md
 
-- FreeLLMAPI expone una API OpenAI-compatible en \`POST /v1/chat/completions\`.
+- FreeLLMAPI expone una API OpenAI-compatible en `POST /v1/chat/completions`.
 - El servidor de pruebas se publica localmente en puerto 3001.
 - El propietario advierte que el producto es para experimentación personal, no para producción. Cada proveedor impone sus propios términos y límites.
 - No ofrece aislamiento multiempresa listo para comercializar. Las cuotas agregadas no equivalen a tokens garantizados.
@@ -17,16 +17,16 @@ Documentación de la API: https://github.com/tashfeenahmed/freellmapi/blob/main/
 
 1. Validación de URL *loopback*, HTTP local y puerto 3001.
 2. Construcción de un mensaje **fijo y sintético**, nunca contenidos de clientes.
-3. Compatibilidad esperada de HTTP, JSON y cabecera \`x-routed-via\`, usando respuestas simuladas.
+3. Compatibilidad esperada de HTTP, JSON y cabecera `x-routed-via`, usando respuestas simuladas.
 4. Manejo de HTTP 429, errores de transporte y esquema incorrecto sin imprimir secretos.
 
 Ejecutar con Node.js 22+:
 
-\`\`\`sh
+```sh
 npm test
-\`\`\`
+```
 
-El workflow de GitHub Actions existente también ejecuta las pruebas para cambios en \`src/\` y \`test/\`.
+El workflow de GitHub Actions existente también ejecuta las pruebas para cambios en `src/` y `test/`.
 
 ## Qué NO hemos comprobado
 
@@ -38,7 +38,7 @@ El workflow de GitHub Actions existente también ejecuta las pruebas para cambio
 
 ## Pasos posteriores (requieren validación manual)
 
-1. Auditar release/tags, \`Dockerfile\`, \`docker-compose.yml\`, scripts de instalación, dependencias, mecanismos de actualización y telemetría del proveedor. No ejecutar \`curl | bash\`.
+1. Auditar release/tags, `Dockerfile`, `docker-compose.yml`, scripts de instalación, dependencias, mecanismos de actualización y telemetría del proveedor. No ejecutar `curl | bash`.
 2. Preparar en una máquina de pruebas separada una instalación con origen fijado por hash, sin puertos públicos y con salida a red restringida.
 3. Si existe una clave de pruebas autorizada y las condiciones lo permiten, ejecutar la sonda con datos sintéticos y registrar solo éxito, tiempo, proveedor y estado HTTP sin guardar prompts/respuestas.
 4. Medir 429/fallback con controles del proveedor, sin eludir límites, sin cuentas duplicadas y sin cargar información real.
