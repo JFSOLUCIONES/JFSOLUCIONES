@@ -147,7 +147,7 @@ jobs:
 
   remediation-preview:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
       UPSTREAM_SHA: "43b92cdfedd2c85b17f666080bab5b6c8707a0fa"
     steps:
@@ -232,6 +232,34 @@ jobs:
             JSON.stringify({counts:counts(after.metadata.vulnerabilities),findings}));
           NODE
 
+      - name: Apply targeted Undici 6.29.1 patch in temporary copy
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          # Fixed version per GHSA-xjj6-f33q-929c; stays within Undici 6.x.
+          npm install --workspace @freellmapi/server --save-exact --package-lock-only --ignore-scripts --no-fund --no-audit undici@6.29.1
+          node -e 'const x=require("./server/package.json");if(x.dependencies?.undici!=="6.29.1")process.exit(1);console.log("UNDICI_DIRECT_PIN=6.29.1")'
+          npm audit --omit=dev --json > "$RUNNER_TEMP/audit-patched.json" || true
+          node - "$RUNNER_TEMP/audit-patched.json" <<'NODE'
+          const fs = require('node:fs');
+          const audit = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          const v = audit.metadata?.vulnerabilities;
+          if(!v) throw new Error("PATCHED_AUDIT_UNAVAILABLE");
+          const counts={
+            critical:v.critical||0,high:v.high||0,
+            moderate:v.moderate||0,low:v.low||0
+          };
+          console.log("SCA_AFTER_UNDICI_6_29_1:",JSON.stringify(counts));
+          console.log("REMAINING_HIGH_PACKAGES:",JSON.stringify(
+            Object.entries(audit.vulnerabilities||{})
+              .filter(([,x])=>x.severity==='high'||x.severity==='critical')
+              .map(([name,x])=>({package:name,severity:x.severity}))
+          ));
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/jf-remediation-gate.json',
+            JSON.stringify({counts}));
+          NODE
+
       - name: Reinstall updated lockfile and run compile, migration tests and lint
         shell: bash
         working-directory: freellmapi-upstream
@@ -241,6 +269,13 @@ jobs:
           npm run build
           npm run test:migrations
           npm run lint
+
+      - name: Run full upstream unit and integration test suites with patched dependencies
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm test
 
       - name: Gate - block unless security checks are clear
         shell: bash
