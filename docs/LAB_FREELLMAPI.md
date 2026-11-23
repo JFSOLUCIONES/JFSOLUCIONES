@@ -13,12 +13,17 @@ Documentación de la API: https://github.com/tashfeenahmed/freellmapi/blob/main/
 - El propietario advierte que el producto es para experimentación personal, no para producción. Cada proveedor impone sus propios términos y límites.
 - No ofrece aislamiento multiempresa listo para comercializar. Las cuotas agregadas no equivalen a tokens garantizados.
 
+## Auditoría estática de upstream
+
+Consultar [LAB_FREELLMAPI_AUDITORIA.md](LAB_FREELLMAPI_AUDITORIA.md): revisión de Docker, entrypoint, versiones, superficie de exposición, seguridad y puertas de aprobación. Es una revisión preliminar sin análisis dinámico del servicio.
+
 ## Qué sí comprobamos
 
 1. Validación de URL *loopback*, HTTP local y puerto 3001.
 2. Construcción de un mensaje **fijo y sintético**, nunca contenidos de clientes.
 3. Compatibilidad esperada de HTTP, JSON y cabecera `x-routed-via`, usando respuestas simuladas.
 4. Manejo de HTTP 429, errores de transporte y esquema incorrecto sin imprimir secretos.
+5. **Petición HTTP real a un servidor simulado local**, con clave deliberadamente falsa, respuesta correcta, error 429 y rechazo de redirecciones. No se ha contactado FreeLLMAPI.
 
 Ejecutar con Node.js 22+:
 
