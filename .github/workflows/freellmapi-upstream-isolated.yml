@@ -277,6 +277,31 @@ jobs:
           set -euo pipefail
           npm test
 
+      - name: Preserve reproducible upstream dependency patch
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/jf-freellmapi-remediation"
+          mkdir -p "$dir"
+          git diff --binary -- package.json package-lock.json server/package.json client/package.json cli/package.json shared/package.json > "$dir/verified-dependency-change.patch"
+          test -s "$dir/verified-dependency-change.patch"
+          cp package-lock.json "$dir/package-lock.patched.json"
+          cp server/package.json "$dir/server-package.patched.json"
+          cp "$RUNNER_TEMP/jf-remediation-gate.json" "$dir/security-gate.json"
+          printf 'upstream_commit=%s\n' "$UPSTREAM_SHA" > "$dir/metadata.txt"
+          printf 'node_major=22\nscope=ephemeral_build_only\nproduction_approved=false\n' >> "$dir/metadata.txt"
+          ( cd "$dir" && sha256sum verified-dependency-change.patch package-lock.patched.json server-package.patched.json security-gate.json > SHA256SUMS )
+          echo "Remediation patch archived for review (no provider credentials)."
+
+      - name: Upload reproducible dependency remediation bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: jf-freellmapi-dependency-patch
+          path: ${{ runner.temp }}/jf-freellmapi-remediation/
+          retention-days: 30
+          if-no-files-found: error
+
       - name: Gate - block unless security checks are clear
         shell: bash
         working-directory: freellmapi-upstream
