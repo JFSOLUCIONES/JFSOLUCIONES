@@ -49,6 +49,9 @@ export async function runSyntheticProbe({
   try {
     response = await transport(origin + '/v1/chat/completions', {
       method: 'POST',
+      // Never follow redirects: a compromised local server could redirect the
+      // synthetic request and bearer token to an external host.
+      redirect: 'error',
       headers: {
         Authorization: 'Bearer ' + apiKey,
         'Content-Type': 'application/json',
