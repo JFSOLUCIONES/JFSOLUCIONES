@@ -1,0 +1,134 @@
+name: JF LAB - FreeLLMAPI upstream isolated smoke
+
+on:
+  pull_request:
+    paths:
+      - "src/labs/freellmapi-contract.js"
+      - "test/freellmapi*.test.js"
+      - "docs/LAB_FREELLMAPI*.md"
+      - ".github/workflows/freellmapi-upstream-isolated.yml"
+
+# No GitHub token permissions, no repository secrets, no deployments.
+permissions: {}
+
+jobs:
+  upstream-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      # Exact publicly reviewed upstream commit. No floating main/latest.
+      UPSTREAM_SHA: "43b92cdfedd2c85b17f666080bab5b6c8707a0fa"
+    steps:
+      - name: Prepare Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Fetch immutable upstream source without credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init freellmapi-upstream
+          git -C freellmapi-upstream remote add origin https://github.com/tashfeenahmed/freellmapi.git
+          git -C freellmapi-upstream -c protocol.version=2 fetch --depth 1 origin "$UPSTREAM_SHA"
+          git -C freellmapi-upstream checkout --detach "$UPSTREAM_SHA"
+          test "$(git -C freellmapi-upstream rev-parse HEAD)" = "$UPSTREAM_SHA"
+          echo "Upstream source pinned to exact reviewed commit."
+
+      - name: Install upstream dependencies and compile (ephemeral runner)
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm ci --no-fund --no-audit
+          npm run build
+
+      - name: Boot real upstream service and check loopback and unauthorized API
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          umask 077
+          export NODE_ENV=production
+          export HOST=127.0.0.1
+          export PORT=3001
+          export ALLOWED_HOSTS=127.0.0.1,localhost
+          export ENCRYPTION_KEY="$(openssl rand -hex 32)"
+          export FREEAPI_DB_PATH="$RUNNER_TEMP/jf-freellmapi-smoke.sqlite"
+          node server/dist/index.js > "$RUNNER_TEMP/jf-freellmapi-smoke.log" 2>&1 &
+          server_pid=$!
+          cleanup() {
+            kill "$server_pid" 2>/dev/null || true
+            wait "$server_pid" 2>/dev/null || true
+            rm -f "$RUNNER_TEMP/jf-freellmapi-smoke.log" "$RUNNER_TEMP"/jf-freellmapi-smoke.sqlite*
+          }
+          trap cleanup EXIT
+
+          ready=0
+          for attempt in $(seq 1 55); do
+            if curl --silent --fail --max-time 2 http://127.0.0.1:3001/api/ping > /dev/null; then
+              ready=1
+              break
+            fi
+            if ! kill -0 "$server_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then
+            echo "::error::Upstream service failed to become ready; logs withheld because setup tokens may be present."
+            exit 1
+          fi
+
+          node --input-type=module <<'NODE'
+          const base = "http://127.0.0.1:3001";
+          const ping = await fetch(base + "/api/ping", { redirect: "error" });
+          if (!ping.ok || (await ping.json()).status !== "ok") throw new Error("PING_FAILED");
+          const unauth = await fetch(base + "/v1/chat/completions", {
+            method: "POST",
+            redirect: "error",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              model: "auto",
+              messages: [{ role: "user", content: "PRUEBA_JF_OK" }],
+              stream: false,
+            }),
+          });
+          if (unauth.status !== 401) throw new Error("UNAUTH_CHAT_NOT_BLOCKED:" + unauth.status);
+          const wrongKey = await fetch(base + "/v1/chat/completions", {
+            method: "POST",
+            redirect: "error",
+            headers: {
+              Authorization: "Bearer DELIBERATELY_INVALID_TEST_TOKEN",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "auto",
+              messages: [{ role: "user", content: "PRUEBA_JF_OK" }],
+              stream: false,
+            }),
+          });
+          if (wrongKey.status !== 401) throw new Error("BAD_KEY_NOT_BLOCKED:" + wrongKey.status);
+          console.log("REAL_UPSTREAM_BOOT_OK; PING_OK; UNAUTH_401; INVALID_KEY_401.");
+          console.log("No provider configured and no real inference attempted.");
+          NODE
+
+      - name: Audit upstream production dependency advisories
+        shell: bash
+        working-directory: freellmapi-upstream
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev --json > "$RUNNER_TEMP/jf-freellmapi-audit.json" || true
+          node - "$RUNNER_TEMP/jf-freellmapi-audit.json" <<'NODE'
+          const fs = require("node:fs");
+          const f = process.argv[2];
+          const parsed = JSON.parse(fs.readFileSync(f, "utf8"));
+          const v = parsed.metadata?.vulnerabilities;
+          if (!v) throw new Error("UPSTREAM_AUDIT_UNAVAILABLE");
+          console.log("Upstream production advisories:", JSON.stringify({
+            critical: v.critical || 0, high: v.high || 0,
+            moderate: v.moderate || 0, low: v.low || 0,
+          }));
+          if ((v.critical || 0) > 0 || (v.high || 0) > 0) {
+            throw new Error("UPSTREAM_HIGH_OR_CRITICAL_ADVISORIES");
+          }
+          NODE
+          rm -f "$RUNNER_TEMP/jf-freellmapi-audit.json"
